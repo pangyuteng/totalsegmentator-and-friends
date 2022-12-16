@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Papaya</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+         background-color: rgb(15, 15, 15);
+         font-family: Courier;
+         color: rgb(142,142,142);
+         font-size: 20px;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='papaya.css')}}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='papaya.js')}}"></script>	
+    
+    <script type="text/javascript">
+        papaya.Container.startPapaya();
+        papaya.Container.syncViewers = true;        
+        var params = [];        
+        params["kioskMode"]=true;
+        params["images"] = ["{{ image_file }}","{{ mask_file }}"];
+        params["{{ image_name }}"] = {"min": -1000, "max": 1000}; // chest ct window level
+        params["{{ mask_basename }}"] = {"lut": "Spectrum","min":0,"max":104,"alpha":0.8};
+        params["smoothDisplay"] = false;
+        params["showOrientation"] = true;
+        params["mainView"] = "axial";
+        params["radiological"] = true;
+        params["worldSpace"] = true;
+        
+    </script>
+
+</head>
+<body style="background-color:black;">
+    
+    <br><br>
+    <div class="container" style="display:flex;flex-flow: row wrap;">
+        <div style="width:800px;height:300px;">
+        <hr>
+        <p2>{{ case_id}} <br></p2>
+        <div class="papaya" data-params="params"></div>
+        </div>
+    </div>
+
+</body>
+</html>

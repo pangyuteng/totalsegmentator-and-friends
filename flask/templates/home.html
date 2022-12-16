@@ -1,0 +1,29 @@
+<html>
+<head>
+    <style>
+        body {
+         background-color: rgb(255, 255, 255);
+         font-family: Courier;
+         color: rgb(42,42,42);
+         font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<table>
+<tr>
+    <th> case_id</th>
+    <!-- <th> png?  </th> -->
+</tr>
+{% for n,row in df.iterrows() %}
+<tr>
+    <th><a href="{{ url_for('review',case_id=row.case_id) }}">
+    {{row.case_id}}
+    <!-- <th> <img loading=lazy src="{{row.png_file}}" alt="…" style="height:400px;"> </th> -->
+</tr>
+{% endfor %}
+    
+</table>
+
+</body>
+</html>
