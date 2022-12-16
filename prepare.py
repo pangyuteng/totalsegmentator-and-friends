@@ -52,7 +52,8 @@ def main(root_dir):
         seg_file_list = sorted(os.listdir(segmentation_folder))
         
         assert(EXPECTED_COUNT==len(seg_file_list))
-        print(os.path.exists(image_file))
+        assert(os.path.exists(image_file))
+        
         img_obj = imread(image_file)
         arr = sitk.GetArrayFromImage(img_obj)
         mask = np.zeros_like(arr).astype(np.uint8)
