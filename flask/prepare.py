@@ -5,6 +5,7 @@ itksnap -g ct.nii.gz -s segmentations.nii.gz -l totalsegmentator_label.txt
 import os
 import sys
 import random
+from tqdm import tqdm
 import numpy as np
 import SimpleITK as sitk
 
@@ -49,7 +50,7 @@ def prepare_label_file(root_dir):
 
 def main(root_dir):
     case_list = sorted([x for x in os.listdir(root_dir)])
-    for case_id in case_list:
+    for case_id in tqdm(case_list):
         case_folder = os.path.join(root_dir,case_id)
         if not os.path.isdir(case_folder):
             continue
@@ -57,7 +58,8 @@ def main(root_dir):
         dest_mask_file = os.path.join(case_folder,'segmentations.nii.gz')
         segmentation_folder = os.path.join(case_folder,'segmentations')
         thumbnail_file = os.path.join(case_folder,'thumbnail_0.png')
-
+        if os.path.exists(thumbnail_file):
+            continue
         seg_file_list = sorted(os.listdir(segmentation_folder))
         
         assert(EXPECTED_COUNT==len(seg_file_list))
@@ -72,8 +74,9 @@ def main(root_dir):
             seg_obj = imread(seg_file)
             item_mask = sitk.GetArrayFromImage(seg_obj)
             mask[item_mask==1]=n+1
-        generate_mip(img, mask, thumbnail_file)
+
         imwrite(dest_mask_file,mask,img_obj,use_compression=True)
+        generate_mip(img, mask, thumbnail_file)
 
 if __name__ == "__main__":
     prepare_label_file(DATADIR)
