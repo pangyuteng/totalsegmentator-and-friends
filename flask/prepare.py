@@ -12,9 +12,7 @@ DATADIR = os.environ.get('DATADIR')
 if DATADIR is None:
     raise ValueError("please set `DATADIR` as environment variable, root folder path for TotalSegmentator dataset!")
 
-# use TotalSegmentator methods to generate pngs.
-sys.path.append('/mnt/hd1/github/TotalSegmentator')
-from mod_preview import generate_preview
+from mod_preview import generate_mip
 
 
 EXPECTED_COUNT = 104
@@ -74,7 +72,7 @@ def main(root_dir):
             seg_obj = imread(seg_file)
             item_mask = sitk.GetArrayFromImage(seg_obj)
             mask[item_mask==1]=n+1
-        #generate_preview(img, mask, thumbnail_file, smoothing=20, task_name="total")
+        generate_mip(img, mask, thumbnail_file)
         imwrite(dest_mask_file,mask,img_obj,use_compression=True)
 
 if __name__ == "__main__":

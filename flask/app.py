@@ -34,7 +34,8 @@ def review():
 
 @app.route('/')
 def home():
-    case_list = [ {'case_id':x} for x in sorted(os.listdir(root_dir)) \
+    case_list = [ {'case_id':x,"png_url": os.path.join(root_dir,x,"thumbnail_0.png")} \
+        for x in sorted(os.listdir(root_dir)) \
         if os.path.isdir(os.path.join(root_dir,x)) ]
     df = pd.DataFrame(case_list)
     return render_template("home.html",df=df)

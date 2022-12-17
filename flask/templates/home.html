@@ -12,14 +12,14 @@
 <body>
 <table>
 <tr>
-    <th> case_id</th>
-    <!-- <th> png?  </th> -->
+    <th> case_id </th>
+    <th> thumbnail </th>
 </tr>
 {% for n,row in df.iterrows() %}
 <tr>
     <th><a href="{{ url_for('review',case_id=row.case_id) }}">
     {{row.case_id}}
-    <!-- <th> <img loading=lazy src="{{row.png_file}}" alt="…" style="height:400px;"> </th> -->
+    <th> <img loading=lazy src="{{row.png_url}}" alt="…" style="height:400px;"> </th>
 </tr>
 {% endfor %}
     
