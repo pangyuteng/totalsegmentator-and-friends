@@ -1,6 +1,7 @@
 FROM python:3.8.16-bullseye
 
-RUN apt-get update -y; apt-get install -y libgl1-mesa-dev xvfb
+# Needed for fury vtk. ffmpeg also needed
+RUN apt-get update -y; apt-get install libgl1-mesa-dev xvfb ffmpeg libsm6 libxext6 -yq
 
 # Copy the package requirements
 COPY requirements.txt /opt
@@ -10,7 +11,10 @@ WORKDIR /opt
 RUN pip install -U pip
 RUN pip install -r requirements.txt
 
+RUN git clone https://github.com/wasserth/TotalSegmentator.git
+RUN sed -i '/nibabel/d' /opt/TotalSegmentator/totalsegmentator/preview.py
+
 COPY . /opt
 
-# prevent container from exiting - useful for development.
-CMD tail -f /dev/null
+ENV DISPLAY=:0
+RUN Xvfb :0 -screen 1920x1080x24 > /dev/null 2>1 &

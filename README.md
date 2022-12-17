@@ -9,22 +9,22 @@ view wasserth/TotalSegmentator dataset** with rii-mongo/Papaya*
 ```
 
 # build container
-docker build -t totalsegmentator-dataset-viewer .
-
+docker compose build
+sudo apt install mesa-utils
 # prepare single segmetnation (nii.gz) file.
-
 export DATADIR=/mnt/hd2/data/Totalsegmentator_dataset
 
-docker run -it -u $(id -u):$(id -g) -p 5000:5000 \
-    -v ${PWD}:/workdir -w /workdir \
-    -v ${DATADIR}:${DATADIR} \
-    -e DATADIR \
-    totalsegmentator-dataset-viewer bash
+docker run -it -u $(id -u):$(id -g) -e DATADIR --init \
+    -w ${PWD} -v /mnt:/mnt totalsegmentator-dataset-viewer-flask bash
+
+docker run -it -u $(id -u):$(id -g) -e DATADIR -e DISPLAY \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -w ${PWD} -v /mnt:/mnt totalsegmentator-dataset-viewer-flask bash
+
 python prepare.py    
 
 # update volumes in `docker-compose.yml` , and run below
 
-docker compose build
 docker compose up
 
 

@@ -8,6 +8,15 @@ import random
 import numpy as np
 import SimpleITK as sitk
 
+DATADIR = os.environ.get('DATADIR')
+if DATADIR is None:
+    raise ValueError("please set `DATADIR` as environment variable, root folder path for TotalSegmentator dataset!")
+
+# use TotalSegmentator methods to generate pngs.
+sys.path.append('/mnt/hd1/github/TotalSegmentator')
+from mod_preview import generate_preview
+
+
 EXPECTED_COUNT = 104
 random.seed(EXPECTED_COUNT)
 color = lambda : [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)]
@@ -49,23 +58,25 @@ def main(root_dir):
         image_file = os.path.join(case_folder,'ct.nii.gz')
         dest_mask_file = os.path.join(case_folder,'segmentations.nii.gz')
         segmentation_folder = os.path.join(case_folder,'segmentations')
+        thumbnail_file = os.path.join(case_folder,'thumbnail_0.png')
+
         seg_file_list = sorted(os.listdir(segmentation_folder))
         
         assert(EXPECTED_COUNT==len(seg_file_list))
         assert(os.path.exists(image_file))
         
         img_obj = imread(image_file)
-        arr = sitk.GetArrayFromImage(img_obj)
-        mask = np.zeros_like(arr).astype(np.uint8)
+        img = sitk.GetArrayFromImage(img_obj)
+        mask = np.zeros_like(img).astype(np.uint8)
         print(case_id,mask.shape)
         for n,seg_file in enumerate(seg_file_list):
             seg_file = os.path.join(case_folder,'segmentations',seg_file)
             seg_obj = imread(seg_file)
-            arr = sitk.GetArrayFromImage(seg_obj)
-            mask[arr==1]=n+1
+            item_mask = sitk.GetArrayFromImage(seg_obj)
+            mask[item_mask==1]=n+1
+        #generate_preview(img, mask, thumbnail_file, smoothing=20, task_name="total")
         imwrite(dest_mask_file,mask,img_obj,use_compression=True)
-    
+
 if __name__ == "__main__":
-    root_dir = os.environ.get('DATADIR')
-    prepare_label_file(root_dir)
-    main(root_dir)
+    prepare_label_file(DATADIR)
+    main(DATADIR)
