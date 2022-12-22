@@ -1,0 +1,8 @@
+JOB  A  inference.condor
+JOB  B  process.condor
+
+PARENT A CHILD B
+
+CATEGORY A limited
+CATEGORY B limited
+MAXJOBS limited 3
