@@ -1,4 +1,11 @@
-# totalsegmentator-dataset-viewer
+# totalsegmentator-and-friends
+
+
+this repo contains a few scripts used to assess/review Totalsegmentator.
+
+
+#### papaya (nginx+flask) to view image and segmentation
+
 
 ```
 view wasserth/TotalSegmentator dataset** with rii-mongo/Papaya*
@@ -29,3 +36,10 @@ docker compose up
 
 
 ```
+
+#### assess segementation accuracy using publically available datasets.
+
+
+
+
+
