@@ -15,6 +15,9 @@ view wasserth/TotalSegmentator dataset** with rii-mongo/Papaya*
 ![view per scan with papaya](static/case.png "view per scan with papaya")
 
 ```
+# tunnel `$myserver:80` as `localhost:5000`
+
+ssh -L 5000:127.0.0.1:80 $myserver
 
 # build container
 docker compose build
