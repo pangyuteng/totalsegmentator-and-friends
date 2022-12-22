@@ -5,4 +5,4 @@ PARENT A CHILD B
 
 CATEGORY A limited
 CATEGORY B limited
-MAXJOBS limited 5
+MAXJOBS limited 10
