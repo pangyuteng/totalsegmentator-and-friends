@@ -16,9 +16,12 @@ def main(root_folder):
 
         mylist = []
         for x in json_file_list:
+            uid = os.path.basename(os.path.dirname(x))
             with open(x,'r') as f:
                 scores_dict = json.loads(f.read())
-            mylist.append(scores_dict['dice'])
+            myitem = scores_dict['dice']
+            myitem['uid']=uid
+            mylist.append(myitem)
 
         df = pd.DataFrame(mylist)
         df.to_csv(agg_csv_file,index=False)
@@ -28,6 +31,8 @@ def main(root_folder):
     if not os.path.exists(summary_csv_file):
         mylist = []
         for organ_name in df.columns:
+            if organ_name == "uid":
+                continue
             myitem=dict(
                 organ_name=organ_name,
             )
