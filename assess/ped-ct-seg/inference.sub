@@ -16,7 +16,7 @@ request_gpus = 1
 #request_memory = 3GB
 #request_disk = 5GB
 
-max_materialize  = 5
+max_materialize = 5
 arguments = "$(myargs)"
 queue myargs from inference.args
 
