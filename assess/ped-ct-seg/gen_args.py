@@ -21,14 +21,15 @@ for x in folder_list:
     mylist.append(item)
 
 with open('inference.args','w') as f:
-    for mydict in mylist:
+    for n,mydict in enumerate(mylist):
         item_folder = mydict['folder']
+        image_file = os.path.join(item_folder,'image.nii.gz')
         seg_folder = os.path.join(item_folder,'segmentations')
-        myline = f"{item_folder} {seg_folder}\n"
+        myline = f"{image_file} {seg_folder}\n"
         f.write(myline)
 
 with open('process.args','w') as f:
-    for mydict in mylist:
+    for n,mydict in enumerate(mylist):
         item_folder = mydict['folder']
         image_file = os.path.join(item_folder,'image.nii.gz')
         mask_file = os.path.join(item_folder,'mask_preprocessed.nii.gz')
