@@ -19,8 +19,8 @@ condor_submit_dag condor.dag
 https://github.com/wasserth/TotalSegmentator/blob/master/Dockerfile
 docker pull wasserth/totalsegmentator_container:master
 
-https://github.com/BioContainers/containers/blob/master/simpleitk/1.0.1-3-deb-py3/Dockerfile
-docker pull biocontainers/simpleitk:v1.0.1-3-deb-py3_cv1
+https://github.com/pangyuteng/public-scratch/tree/master/ml-docker
+docker pull pangyuteng/ml:latest
 
 
 
