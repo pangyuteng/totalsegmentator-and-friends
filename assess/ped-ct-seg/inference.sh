@@ -2,9 +2,9 @@
 export image_file=$1
 export seg_folder=$2
 
-export file_count=$(ls ${seg_folder} | wc -l)
+export file_count=$(ls ${seg_folder}/*.nii.gz | wc -l)
 if [ "${file_count}" -eq 104 ]; then
-    echo "All 104 iles found!"
+    echo "All 104 files found, inference skipped!"
     exit 0
 fi
 
