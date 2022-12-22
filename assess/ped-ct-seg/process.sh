@@ -16,5 +16,6 @@ if [ -f ${score_file} ]; then
     exit 0
 fi
 
-python process.py $image_file $mask_file $seg_folder $seg_file $score_file
+echo python process.py ${image_file} ${mask_file} ${seg_folder} ${seg_file} ${score_file}
+python process.py ${image_file} ${mask_file} ${seg_folder} ${seg_file} ${score_file}
 

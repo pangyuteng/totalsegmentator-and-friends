@@ -9,4 +9,5 @@ if [ "${file_count}" -eq 104 ]; then
 fi
 
 # inference
+echo TotalSegmentator -i ${image_file} -o ${seg_folder}
 TotalSegmentator -i ${image_file} -o ${seg_folder}

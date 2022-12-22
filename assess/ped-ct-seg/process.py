@@ -122,6 +122,6 @@ python3 process.py \
     /radraid/pteng/ped-ct-seg-nifti/Pediatric-CT-SEG-C26BBB5F/mask_preprocessed.nii.gz \
     /radraid/pteng/ped-ct-seg-nifti/Pediatric-CT-SEG-C26BBB5F/segmentations \
     /radraid/pteng/ped-ct-seg-nifti/Pediatric-CT-SEG-C26BBB5F/segmentations.nii.gz \
-    /radraid/pteng/ped-ct-seg-nifti/Pediatric-CT-SEG-C26BBB5F/dice.json
+    /radraid/pteng/ped-ct-seg-nifti/Pediatric-CT-SEG-C26BBB5F/scores.json
 
 """
