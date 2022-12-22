@@ -10,11 +10,10 @@ log = log/process.$(cluster).$(process).log
 error = log/process.$(cluster).$(process).err
 output = log/process.$(cluster).$(process).out
 
-requirements = (OpSys == "LINUX" && Arch == "X86_64" )
+requirements = ( OpSys == "LINUX" && Arch == "X86_64" )
 request_cpus = 1
-request_gpus = 1
-#request_memory = 3GB
-#request_disk = 5GB
+request_memory = 5GB
+request_disk = 10GB
 
 max_materialize = 5
 arguments = "$(myargs)"
