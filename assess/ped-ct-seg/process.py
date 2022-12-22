@@ -8,6 +8,7 @@ THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 pedctseg_json_file = os.path.join(THIS_DIR,'pedctseg.json')
 totalsegmentator_json_file = os.path.join(THIS_DIR,'totalsegmentator.json')
 totalsegmentator2pedctseg_json_file = os.path.join(THIS_DIR,'totalsegmentator2pedctseg.json')
+
 def load_mappers():
     with open(pedctseg_json_file,'r') as f:
         pedctseg_dict = json.loads(f.read())
@@ -28,22 +29,26 @@ intersect_dict = { ...
     "Lung_L":['lung_lower_lobe_left.nii.gz', 'lung_upper_lobe_left.nii.gz'],
 ... }
 """
-def imread(fpath):
-    reader= sitk.ImageFileReader()
-    reader.SetFileName(fpath)
-    return reader.Execute()
 
-def imwrite(my_file_path,my_arr,src_obj,use_compression=True):
+
+def imread(file_path):
+    reader= sitk.ImageFileReader()
+    reader.SetFileName(file_path)
+    my_obj = reader.Execute()
+    return my_obj
+
+def imwrite(file_path,my_arr,src_obj,use_compression=True):
     my_obj = sitk.GetImageFromArray(my_arr)
     my_obj.CopyInformation(src_obj)
     writer = sitk.ImageFileWriter()    
-    writer.SetFileName(my_file_path)
+    writer.SetFileName(file_path)
     writer.SetUseCompression(use_compression)
     writer.Execute(my_obj)
 
 def merge_masks(segmentation_folder,output_nifti_file):
     final_mask = None
     for basename in os.listdir(segmentation_folder):
+        print('merge_masks',basename)
         if not basename.endswith('.nii.gz'):
             continue
         mask_file = os.path.join(segmentation_folder,basename)
@@ -59,7 +64,7 @@ def merge_masks(segmentation_folder,output_nifti_file):
 
 # Dice similarity function
 def dice_fn(y_true,y_pred):
-    intersection = np.sum(y_pred[y_true==k]) * 2.0
+    intersection = np.sum(y_pred[y_true==1]) * 2.0
     dice_score = intersection / (np.sum(y_pred) + np.sum(y_true))
     return dice_score
 
@@ -71,9 +76,12 @@ def main(image_nifti_file,mask_nifti_file,segmentation_folder,output_nifti_file,
 
     # compute dice
     score_dict = {"dice":{}}
+    print('reading',mask_nifti_file)
     gt_obj = imread(mask_nifti_file)
-    gt_mask = sitk.GetImageFromArray(gt_obj)
+    gt_mask = sitk.GetArrayFromImage(gt_obj)
+    
     for organ_name,file_list in intersect_dict.items():
+        print(organ_name)
         ped_val = pedctseg_dict[organ_name]
         absent = np.sum(gt_mask==ped_val) == 0
         if absent: # no ground truth (no y)
@@ -82,17 +90,19 @@ def main(image_nifti_file,mask_nifti_file,segmentation_folder,output_nifti_file,
         if len(file_list)==0: # no yhat
             score_dict["dice"][organ_name]=None
             continue
-        y_true = gt_mask[gt_mask==ped_val]
-        y_pred = np.zeros_like(y)
+        y_true = gt_mask==ped_val
+        y_pred = np.zeros_like(y_true)
         for basename in file_list:
+            print(f'    {basename}')
             file_path = os.path.join(segmentation_folder,basename)
             mask_obj = imread(file_path)
-            mask_arr = sitk.GetImageFromArray(mask_obj)
-            y_pred[mask_arr] == 1
-
+            mask_arr = sitk.GetArrayFromImage(mask_obj)
+            y_pred[mask_arr==1] = 1
+        print(y_true.shape,y_pred.shape,np.sum(y_true),np.sum(y_pred))
         score_dict["dice"][organ_name]=dice_fn(y_true, y_pred)
+
         with open(score_json_file,"w") as f:
-            f.write(json.dumps(dice_dict,sort_keys=True,indet=4))
+            f.write(json.dumps(score_dict,sort_keys=True,indent=4))
 
 if __name__ == "__main__":
     image_nifti_file = sys.argv[1]
