@@ -20,3 +20,11 @@ for x in folder_list:
     item=dict(image_file=image_file,mask_file=mask_file)
     mylist.append(item)
 
+/radraid/pteng/ped-ct-seg-nifti/Pediatric-CT-SEG-C26BBB5F/image.nii.gz /radraid/pteng/ped-ct-seg-nifti/Pediatric-CT-SEG-C26BBB5F/segmentations
+
+/radraid/pteng/ped-ct-seg-nifti/Pediatric-CT-SEG-355/image.nii.gz /radraid/pteng/ped-ct-seg-nifti/Pediatric-CT-SEG-355/segmentations /radraid/pteng/ped-ct-seg-nifti/Pediatric-CT-SEG-355/segmentations.nii.gz
+
+"""
+
+python gen_args.py /radraid/pteng/ped-ct-seg-nifti
+"""
