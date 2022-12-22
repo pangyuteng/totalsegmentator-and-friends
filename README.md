@@ -7,9 +7,10 @@ this repo contains a few scripts used to assess/review Totalsegmentator.
 #### papaya (nginx+flask) to view image and segmentation
 
 view wasserth/TotalSegmentator dataset** with rii-mongo/Papaya*
+```
 ** https://github.com/rii-mango/Papaya
 * https://github.com/wasserth/TotalSegmentator
-
+```
 ![overview](static/home.png "overview")
 ![view per scan with papaya](static/case.png "view per scan with papaya")
 
