@@ -1,5 +1,5 @@
 universe = docker
-docker_image = biocontainers/simpleitk:v1.0.1-3-deb-py3_cv1
+docker_image = pangyuteng/ml:latest
 
 executable = process.sh
 transfer_input_files = process.sh,process.py

@@ -1,5 +1,5 @@
-JOB  A  inference.condor
-JOB  B  process.condor
+JOB  A  inference.sub
+JOB  B  process.sub
 
 PARENT A CHILD B
 
