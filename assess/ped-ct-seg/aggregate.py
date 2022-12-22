@@ -50,13 +50,13 @@ def main(root_folder):
             mylist.append(myitem)
         df = pd.DataFrame(mylist)
         df.to_csv(summary_csv_file,index=False)
-    dtype_dict = {'val_mean':"Float32",'val_sd':"Float32",'val_n':"Int64"}
+
+    dtype_dict = {'val_median':'Float32','val_mean':"Float32",'val_sd':"Float32",'val_n':"Int64"}
     df = pd.read_csv(summary_csv_file,dtype=dtype_dict)
     print(df)
 
 
 if __name__ == "__main__":
-    # root folder
     root_folder = sys.argv[1]
     main(root_folder)
 
