@@ -3,3 +3,4 @@ log/*.err
 log/*.out
 condor.dag.*
 docker_stderror
+*.args

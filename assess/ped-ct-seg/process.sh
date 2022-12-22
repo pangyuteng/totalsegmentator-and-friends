@@ -1,6 +1,8 @@
 #!/bin/bash
-export image_nifti_file=$1
-export mask_nifti_file=$2
-export segmentation_folder=$3
+export image_file=$1
+export mask_file=$2
+export seg_folder=$3
+export seg_file=$4
+export score_file=$5
 
-python process.py $image_nifti_file $mask_nifti_file $segmentation_folder
+python process.py $image_file $mask_file $seg_folder $seg_file $score_file
