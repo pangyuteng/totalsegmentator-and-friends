@@ -40,6 +40,10 @@ docker compose up
 #### assess segementation accuracy using publically available datasets.
 
 
++ for performance assessment, see:
 
+    + assess/ped-ct-seg/README.md
+
+    + TODO: assess/amos2022/README.md
 
 
