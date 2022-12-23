@@ -3,6 +3,7 @@ JOB  B  process.sub
 
 PARENT A CHILD B
 
-CATEGORY A limited
-CATEGORY B limited
-MAXJOBS limited 10
+CATEGORY A limitedA
+CATEGORY B limitedB
+MAXJOBS limitedA 3
+MAXJOBS limitedB 10
