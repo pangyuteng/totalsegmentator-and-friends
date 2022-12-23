@@ -42,16 +42,16 @@ def main(root_folder):
                 m,sd = np.mean(val_list),np.std(val_list)
                 med = np.median(val_list)
                 myitem.update(dict(
-                    median=np.round(med,4),
-                    mean=np.round(m,4),
-                    sd=np.round(sd,4),
+                    dice_median=np.round(med,4),
+                    dice_mean=np.round(m,4),
+                    dice_sd=np.round(sd,4),
                     n=n,
                 ))
             mylist.append(myitem)
         df = pd.DataFrame(mylist)
         df.to_csv(summary_csv_file,index=False)
 
-    dtype_dict = {'median':'Float32','mean':"Float32",'sd':"Float32",'n':"Int64"}
+    dtype_dict = {'dice_median':'Float32','dice_mean':"Float32",'dice_sd':"Float32",'n':"Int64"}
     df = pd.read_csv(summary_csv_file,dtype=dtype_dict)
     df = df.dropna()
     print(f'dice score of organs predicted TotalSegmentator(dataset: ped-ct-org, n={sample_n})')
