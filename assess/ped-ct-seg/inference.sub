@@ -19,8 +19,8 @@ requirements = (OpSys == "LINUX" && Arch == "X86_64" && GPUMEM > 10000 )
 request_cpus = 1
 request_gpus = 1
 
-#request_memory = 20GB
-#request_disk = 20GB
+request_memory = 20GB
+request_disk = 20GB
 
 max_materialize = 5
 arguments = "$(myargs)"
