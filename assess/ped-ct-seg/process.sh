@@ -8,7 +8,7 @@ export score_file=$5
 export file_count=$(ls ${seg_folder}/*.nii.gz | wc -l)
 if [ "${file_count}" -ne 104 ]; then
     echo "inference not yet done!"
-    exit 1
+    exit 0
 fi
 
 if [ -f ${score_file} ]; then
