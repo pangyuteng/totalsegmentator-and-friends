@@ -34,11 +34,26 @@ def review():
 
 @app.route('/')
 def home():
+    url_list = ['totalsegmentator','pet_ct_seg','amos22']
+    return render_template("home.html",url_list=url_list)
+
+@app.route('/totalsegmentator')
+def totalsegmentator():
     case_list = [ {'case_id':x,"png_url": os.path.join(root_dir,x,"thumbnail_0.png")} \
         for x in sorted(os.listdir(root_dir)) \
         if os.path.isdir(os.path.join(root_dir,x)) ]
     df = pd.DataFrame(case_list)
-    return render_template("home.html",df=df)
+    return render_template("totalsegmentator.html",df=df)
+
+@app.route('/pet-ct-seg')
+def pet_ct_seg():
+    df=[]
+    return render_template("pet_ct_seg.html",df=df)
+
+@app.route('/amos22')
+def amos22():
+    df=[]
+    return render_template("amos22.html",df=df)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
