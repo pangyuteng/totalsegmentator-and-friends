@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Papaya</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+         background-color: rgb(15, 15, 15);
+         font-family: Courier;
+         color: rgb(142,142,142);
+         font-size: 20px;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='papaya.css')}}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='papaya.js')}}"></script>	
+    
+    <script type="text/javascript">
+        papaya.Container.startPapaya();
+        papaya.Container.syncViewers = true;
+        var manual_params = [];
+        manual_params["kioskMode"]=true;
+        manual_params["images"] = ["{{ image_file }}","{{ pedctseg_mask_file }}"];
+        manual_params["{{ image_name }}"] = {"min": -1000, "max": 1000};
+        manual_params["{{ pedctseg_mask_basename }}"] = {"lut": "Spectrum","min":0,"max":28,"alpha":0.8};
+        manual_params["smoothDisplay"] = false;
+        manual_params["showOrientation"] = true;
+        manual_params["mainView"] = "axial";
+        manual_params["radiological"] = true;
+        manual_params["worldSpace"] = false;
+
+        var totalseg_params = [];
+        totalseg_params["kioskMode"]=true;
+        totalseg_params["images"] = ["{{ image_file }}","{{ totalseg_mask_file }}"];
+        totalseg_params["{{ image_name }}"] = {"min": -1000, "max": 1000};
+        totalseg_params["{{ totalseg_mask_basename }}"] = {"lut": "Spectrum","min":0,"max":104,"alpha":0.8};
+        totalseg_params["smoothDisplay"] = false;
+        totalseg_params["showOrientation"] = true;
+        totalseg_params["mainView"] = "axial";
+        totalseg_params["radiological"] = true;
+        totalseg_params["worldSpace"] = false;
+
+    </script>
+
+</head>
+<body style="background-color:black;">
+    
+    <br><br>
+    {{case_id}}<br>
+    <hr>
+    <div class="container" style="display:flex;flex-flow: row wrap;">
+        <div style="width:800px;height:300px;">
+        <p2>manual<br></p2>
+        <div class="papaya" data-params="manual_params"></div>
+        </div>
+        <div style="width:800px;height:300px;">
+        <p2>totalsegmentator<br></p2>
+        <div class="papaya" data-params="totalseg_params"></div>
+        </div>
+    </div>
+
+</body>
+</html>
