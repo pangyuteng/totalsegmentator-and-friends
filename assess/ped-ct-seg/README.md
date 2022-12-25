@@ -10,13 +10,23 @@ https://wiki.cancerimagingarchive.net/pages/viewpage.action?pageId=89096588
 + download data and process dicom and segmentation to .nii.gz
 https://github.com/pangyuteng/pediatric-ct-seg
 
++ (optional) clean up generated data from prior run (add `-delete` to delete)
+```
+cd $DATADIR
+find . -name "liver.nii.gz" -print
+find . -name "segmentations.nii.gz" -print
+find . -name "scores.json" -print
+```
+
 + run below to generate *.args
+```
 python gen_args.py $DATADIR $RESULTSDIR
+```
 
 + submit inference and dice computation, and results aggregation DAG jobs.
+```
 rm condor.dag.* docker_stderror log/* results/*.csv
 condor_submit_dag condor.dag
-
 ```
 
 ## containers used in condor jobs
