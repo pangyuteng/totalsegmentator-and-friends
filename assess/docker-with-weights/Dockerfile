@@ -6,3 +6,4 @@ FROM wasserth/totalsegmentator_container:master
 ENV TOTALSEG_WEIGHTS_PATH=/opt/totalsegmentator_weights
 RUN python /opt/conda/lib/python3.6/site-packages/totalsegmentator/download_pretrained_weights.py
 
+RUN chmod 777 /opt/totalsegmentator_weights
