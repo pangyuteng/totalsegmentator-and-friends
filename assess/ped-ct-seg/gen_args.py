@@ -41,7 +41,7 @@ with open('process.args','w') as f:
         f.write(myline)
 
 with open('aggregate.args','w') as f:
-    myline = f"python aggregate.py {root_folder} {csv_folder}\n"
+    myline = f"{root_folder} {csv_folder}\n"
     f.write(myline)
 
 """
@@ -49,12 +49,12 @@ with open('aggregate.args','w') as f:
 docker run -it -u $(id -u):$(id -g) \
     -w $PWD -v /mnt:/mnt pangyuteng/ml:latest bash
 
-python gen_args.py /mnt/hd2/data/ped-ct-seg-nifti .
+python gen_args.py /mnt/hd2/data/ped-ct-seg-nifti results
 
 docker run -it -u $(id -u):$(id -g) \
     -w $PWD -v /cvibraid:/cvibraid -v /radraid:/radraid \
     pangyuteng/ml:latest bash
 
-python gen_args.py /radraid/pteng/ped-ct-seg-nifti .
+python gen_args.py /radraid/pteng/ped-ct-seg-nifti results
 
 """
