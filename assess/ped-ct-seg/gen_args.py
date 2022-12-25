@@ -1,8 +1,9 @@
 import os
 import sys
+import warnings
 
-# root folder
-root_folder = sys.argv[1]
+root_folder = os.path.abspath(sys.argv[1])
+csv_folder = os.path.abspath(sys.argv[2])
 
 folder_list = [os.path.join(root_folder,x) for x in os.listdir(root_folder) if os.path.isdir(os.path.join(root_folder,x))]
 #assert(len(folder_list)==359)
@@ -12,10 +13,10 @@ for x in folder_list:
     image_file = os.path.join(x,'image.nii.gz')
     mask_file = os.path.join(x,'mask_preprocessed.nii.gz')
     if not os.path.exists(image_file):
-        print('missing image_file',x)
+        warnings.warn(f'missing image_file {x}')
         continue
     if not os.path.exists(mask_file):
-        print('missing mask_file',x)
+        warnings.warn(f'missing mask_file {x}')
         continue
     item=dict(folder=x,image_file=image_file,mask_file=mask_file)
     mylist.append(item)
@@ -39,10 +40,21 @@ with open('process.args','w') as f:
         myline = f"{image_file} {mask_file} {seg_folder} {seg_file} {json_file}\n"
         f.write(myline)
 
+with open('aggregate.args','w') as f:
+    myline = f"python aggregate.py {root_folder} {csv_folder}\n"
+    f.write(myline)
+
 """
+
+docker run -it -u $(id -u):$(id -g) \
+    -w $PWD -v /mnt:/mnt pangyuteng/ml:latest bash
+
+python gen_args.py /mnt/hd2/data/ped-ct-seg-nifti .
+
 docker run -it -u $(id -u):$(id -g) \
     -w $PWD -v /cvibraid:/cvibraid -v /radraid:/radraid \
     pangyuteng/ml:latest bash
 
-python gen_args.py /radraid/pteng/ped-ct-seg-nifti
+python gen_args.py /radraid/pteng/ped-ct-seg-nifti .
+
 """
