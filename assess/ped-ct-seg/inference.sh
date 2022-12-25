@@ -11,8 +11,8 @@ if [ -d "${seg_folder}" ]; then
 fi
 
 # inference
-echo TotalSegmentator -i ${image_file} -o ${seg_folder}
-TotalSegmentator -i ${image_file} -o ${seg_folder}
+echo TotalSegmentator --fast -i ${image_file} -o ${seg_folder}
+TotalSegmentator --fast -i ${image_file} -o ${seg_folder}
 retVal=$?
 if [ $retVal -ne 0 ]; then
     # avoid condor stopping the entire dag
