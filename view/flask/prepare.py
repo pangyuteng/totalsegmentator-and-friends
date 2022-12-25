@@ -9,10 +9,6 @@ from tqdm import tqdm
 import numpy as np
 import SimpleITK as sitk
 
-DATADIR_TOTALSEG = os.environ.get('DATADIR_TOTALSEG')
-if DATADIR_TOTALSEG is None:
-    raise ValueError("please set `DATADIR_TOTALSEG` as environment variable, root folder path for TotalSegmentator dataset!")
-
 from mod_preview import generate_mip
 
 
@@ -79,5 +75,10 @@ def main(root_dir):
         generate_mip(img, mask, thumbnail_file)
 
 if __name__ == "__main__":
-    prepare_label_file(DATADIR_TOTALSEG)
-    main(DATADIR_TOTALSEG)
+    datadir_totalseg = sys.argv[1]
+    prepare_label_file(datadir_totalseg)
+    main(datadir_totalseg)
+
+"""
+
+"""
