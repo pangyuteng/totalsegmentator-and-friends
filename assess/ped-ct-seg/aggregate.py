@@ -23,7 +23,7 @@ def main(root_folder,output_folder):
     print(root_folder)
     for path in Path(root_folder).rglob("*scores.json"):
         json_file_list.append(str(path))
-    print(json_file_list,'!!!!')
+
     mylist = []
     for x in json_file_list:
         uid = os.path.basename(os.path.dirname(x))
