@@ -15,7 +15,7 @@ request_cpus = 1
 request_memory = 5GB
 request_disk = 10GB
 
-max_materialize = 5
+max_materialize = 30
 arguments = "$(myargs)"
 queue myargs from process.args
 
