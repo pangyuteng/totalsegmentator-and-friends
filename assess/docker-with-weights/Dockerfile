@@ -1,8 +1,8 @@
 FROM wasserth/totalsegmentator_container:master
 
-# getting below permission error in htcondor+docker
-RUN mkdir -p /nonexistent/.totalsegmentator && chmod -R 777 /nonexistent
+#
+# download weights! https://github.com/wasserth/TotalSegmentator/blob/bc865436188c68fff55dadff4aaa8940a96609e5/totalsegmentator/libs.py#L77
+#
+ENV TOTALSEG_WEIGHTS_PATH=/opt/totalsegmentator_weights
+RUN python /opt/conda/lib/python3.6/site-packages/totalsegmentator/download_pretrained_weights.py
 
-# # maybe below will trick docker to cache the weights?
-# COPY blank.nii.gz /tmp/blank.nii.gz
-# RUN TotalSegmentator -i /tmp/blank.nii.gz -o /tmp/blank-seg
