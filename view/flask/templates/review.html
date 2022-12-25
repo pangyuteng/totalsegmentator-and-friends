@@ -28,19 +28,18 @@
         params["showOrientation"] = true;
         params["mainView"] = "axial";
         params["radiological"] = true;
-        params["worldSpace"] = false;
-        //params["ignoreNiftiTransforms"] = true;
+        params["ignoreNiftiTransforms"] = true; // ignore orientation in nifti!
+        //params["worldSpace"] = true; // transform per orientation in nifti 
         
     </script>
 
 </head>
 <body style="background-color:black;">
     
-    <br><br>
+    <p2>{{ case_id}} <br></p2>
+    <hr>
     <div class="container" style="display:flex;flex-flow: row wrap;">
         <div style="width:800px;height:300px;">
-        <hr>
-        <p2>{{ case_id}} <br></p2>
         <div class="papaya" data-params="params"></div>
         </div>
     </div>

@@ -28,7 +28,7 @@
         manual_params["showOrientation"] = true;
         manual_params["mainView"] = "axial";
         manual_params["radiological"] = true;
-        manual_params["worldSpace"] = false;
+        manual_params["ignoreNiftiTransforms"] = true;
 
         var totalseg_params = [];
         totalseg_params["kioskMode"]=true;
@@ -39,14 +39,13 @@
         totalseg_params["showOrientation"] = true;
         totalseg_params["mainView"] = "axial";
         totalseg_params["radiological"] = true;
-        totalseg_params["worldSpace"] = false;
+        totalseg_params["ignoreNiftiTransforms"] = true;
 
     </script>
 
 </head>
 <body style="background-color:black;">
-    
-    <br><br>
+
     {{case_id}}<br>
     <hr>
     <div class="container" style="display:flex;flex-flow: row wrap;">
