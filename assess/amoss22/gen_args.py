@@ -13,12 +13,13 @@ with open(json_file,'r') as f:
 label_dict = dataset_dict['labels']
 # {"0": "background", "1": "spleen","2": "right kidney", "3": "left kidney", "4": "gall bladder", "5": "esophagus", "6": "liver", "7": "stomach", "8": "arota", "9":
 
-mylist = []
-mylist.extend(dataset_dict['training'])
-mylist.extend(dataset_dict['validation'])
-mylist.extend(dataset_dict['test'])
+datalist = []
+datalist.extend(dataset_dict['training'])
+datalist.extend(dataset_dict['validation'])
+datalist.extend(dataset_dict['test'])
 
-for myitem in mylist:
+mylist = []
+for myitem in datalist:
 
     if 'label' not in myitem.keys():
         continue
@@ -34,10 +35,13 @@ for myitem in mylist:
     case_id = os.path.basename(image_file).replace('.nii.gz','')
     case_folder = os.path.join(root_folder,'totalseg',case_id)
     os.makedirs(case_folder,exist_ok=True)
-    item=dict(image_file=image_file,mask_file=mask_file,case_folder=case_folder)
+    item=dict(
+        image_file=image_file,
+        mask_file=mask_file,
+        case_folder=case_folder)
     mylist.append(item)
 
-assert(len(mylist)==960)
+assert(len(mylist)==360) # Train + Validation
 
 flags = ""
 with open('inference.args','w') as f:
