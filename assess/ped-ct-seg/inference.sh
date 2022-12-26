@@ -12,8 +12,8 @@ if [ -d "${seg_folder}" ]; then
 fi
 
 # inference
-echo TotalSegmentator -i ${image_file} -o ${seg_folder} {flags}
-TotalSegmentator -i ${image_file} -o ${seg_folder} {flags}
+echo TotalSegmentator -i ${image_file} -o ${seg_folder} ${flags}
+TotalSegmentator -i ${image_file} -o ${seg_folder} ${flags}
 
 retVal=$?
 if [ $retVal -ne 0 ]; then
