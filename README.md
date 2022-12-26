@@ -25,7 +25,7 @@ docker compose build
 
 # prepare single segmentation (nii.gz) and png files.
 
-export DATADIR=/mnt/hd2/data/Totalsegmentator_dataset
+export DATADIR=/mnt/scratch/data/Totalsegmentator_dataset
 docker run -it -u $(id -u):$(id -g) -e DATADIR --init \
     -w ${PWD} -v /mnt:/mnt totalsegmentator-dataset-viewer-flask bash
 python prepare.py

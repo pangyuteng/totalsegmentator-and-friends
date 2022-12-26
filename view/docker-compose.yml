@@ -17,9 +17,9 @@ services:
         restart: always
         command: python app.py
         environment:
-            - DATADIR_TOTALSEG=/mnt/hd2/data/Totalsegmentator_dataset
-            - DATADIR_PEDCTSEG=/mnt/hd2/data/ped-ct-seg-nifti
-            - DATADIR_AMOS22=/mnt/hd2/data/amos22
+            - DATADIR_TOTALSEG=/mnt/scratch/data/Totalsegmentator_dataset
+            - DATADIR_PEDCTSEG=/mnt/scratch/data/ped-ct-seg-nifti
+            - DATADIR_AMOS22=/mnt/scratch/data/amos22
         volumes:
             - /mnt:/mnt
             - ${PWD}/flask:/opt

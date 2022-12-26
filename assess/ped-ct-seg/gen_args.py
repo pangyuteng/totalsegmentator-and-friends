@@ -51,7 +51,7 @@ with open('aggregate.args','w') as f:
 docker run -it -u $(id -u):$(id -g) \
     -w $PWD -v /mnt:/mnt pangyuteng/ml:latest bash
 
-python gen_args.py /mnt/hd2/data/ped-ct-seg-nifti results
+python gen_args.py /mnt/scratch/data/ped-ct-seg-nifti results
 
 docker run -it -u $(id -u):$(id -g) \
     -w $PWD -v /cvibraid:/cvibraid -v /radraid:/radraid \
