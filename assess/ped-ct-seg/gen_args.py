@@ -42,7 +42,7 @@ with open('process.args','w') as f:
         f.write(myline)
 
 with open('aggregate.args','w') as f:
-    myline = f"{root_folder} {csv_folder}\n"
+    myline = f"{root_folder} {csv_folder} -p fast\n"
     f.write(myline)
 
 """
