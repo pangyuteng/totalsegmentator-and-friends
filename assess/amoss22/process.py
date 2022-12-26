@@ -23,8 +23,7 @@ amos22_dict, totalsegmentator_dict, totalsegmentator2amos22_dict = load_mappers(
 intersect_dict = {}
 for k,v in amos22_dict.items():
     intersect_dict[k] = [q for q,t in totalsegmentator2amos22_dict.items() if t==v]
-print(intersect_dict)
-sys.exit(1)
+
 """
 # sample output for `intersect_dict`
 intersect_dict {
