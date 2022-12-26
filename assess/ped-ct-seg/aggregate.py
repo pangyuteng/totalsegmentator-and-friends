@@ -24,8 +24,8 @@ def my_plots(root_folder,output_folder,postfix=''):
     plt.xticks(x,n,rotation=45)
     plt.ylabel('dice')
     plt.grid(True)
-    postfix_str = '' if postfix == '' else f'postfix: {postfix}'
-    plt.title('dice between manual vs totalsegmentator\ndataset: ped-ct-seg (n=~359), {postfix_str}')
+    postfix_str = f'csv basename: {os.path.basename(summary_csv_file)}'
+    plt.title(f'dice between manual vs totalsegmentator\ndataset: ped-ct-seg (n=~359), {postfix_str}')
     fig.autofmt_xdate()
     plt.show()
     plt.savefig(summary_png_file)
