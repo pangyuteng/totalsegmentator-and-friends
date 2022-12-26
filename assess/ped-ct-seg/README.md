@@ -31,13 +31,7 @@ condor_submit_dag condor.dag
 
 # results 
 
-computing dice with manual vs totalsegmentator (with and without `--fast` flag) using dataset ped-ct-seg (n=~359)
-
-dice(manual,totalsegmentator-default)
-![png](results/summary-default.png "png")
-
-dice(manual,totalsegmentator-fast)
-![png](results/summary-default.png "png")
+dice computed using manual vs totalsegmentator (with and without `--fast` flag) contours using dataset ped-ct-seg (n=~359) (csvs available in `results` folder).
 
 displaying above results ran with and without `--fast` flag
 ![png](results/compare.png "png")
