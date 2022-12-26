@@ -89,8 +89,10 @@ def results_with_age():
         aspect = 1,
         legend_out=True)
 
-    plt.title("age plotted against dice\n"+\
-        "dice between manual contours and totalsegmentator predictions, dataset ped-ct-seg n=~359)")
+    plt.title("Age plotted against dice.\n"+\
+        "(Dice between manual contours and TotalSegmentator predictions, dataset used Pediatric-CT-SEG n=~359.\n"+\
+        "github@s: TotalSegmentator @wasserth, Pediatric-CT-SEG @jordanpn, plot by @pangyuteng 2022-12-26"
+        )
 
     figure_output_path = "results/age-vs-dice.png"
     plt.grid(True)
