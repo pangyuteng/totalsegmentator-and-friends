@@ -34,8 +34,8 @@ def my_plots(root_folder,output_folder,postfix=''):
     vdf = pd.DataFrame(mylist)
     sns.violinplot(vdf,x='dice',y='organ', ax = axes)
     postfix_str = f'csv basename: {os.path.basename(summary_csv_file)}'
-    plt.title(f'dice between manual vs totalsegmentator\ndataset: ped-ct-seg (n=~359), {postfix_str}')    
-    #plt.show()
+    plt.title(f'dice between manual vs totalsegmentator\ndataset: ped-ct-seg (n=~359), {postfix_str}')
+    plt.grid(True)
     plt.savefig(summary_png_file)
 
 def main(root_folder,output_folder,postfix):
