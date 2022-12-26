@@ -1,0 +1,27 @@
+organ_name,dice_median,dice_mean,dice_sd,n
+Adrenal Left,0.0,0.0316,0.0774,326.0
+Adrenal Right,0.0,0.0589,0.1124,316.0
+Bladder,0.0,0.0156,0.0694,338.0
+Bones,0.5145,0.5557,0.2198,359.0
+Breast Left,,,,
+Breast Right,,,,
+Duodenum,0.1698,0.2063,0.1839,341.0
+Esophagus,0.5409,0.5182,0.1704,342.0
+Gall Bladder,0.0,0.1321,0.243,326.0
+Gonads,,,,
+Heart,0.259,0.3266,0.263,345.0
+Kidney Left,0.9294,0.7384,0.3566,335.0
+Kidney Right,0.8319,0.5754,0.4083,330.0
+Large Intestine,0.6357,0.5892,0.1899,342.0
+Liver,0.6864,0.5758,0.3064,347.0
+Lung Left,0.9008,0.7349,0.3225,349.0
+Lung Right,0.8992,0.7727,0.2672,349.0
+Pancreas,0.3315,0.306,0.2696,342.0
+Prostate,,,,
+Rectum,,,,
+Skin,,,,
+Small Intestine,0.4971,0.493,0.2206,344.0
+Spinal Canal,,,,
+Spleen,0.1466,0.3403,0.3659,343.0
+Stomach,0.0143,0.1428,0.2079,344.0
+Thymus,,,,
