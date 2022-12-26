@@ -64,7 +64,7 @@ def results_with_age():
         defaut_item = dict(default_df[default_df.uid==uid].iloc[0,:])
         dicom_item = dict(dicom_df[dicom_df.uid==uid].iloc[0,:])
         organ_list = sorted([x for x in defaut_item.keys() if x != 'uid'])
-
+    
         for organ_name in organ_list:
 
             if np.isnan(defaut_item[organ_name]):

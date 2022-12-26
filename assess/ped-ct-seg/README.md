@@ -35,17 +35,21 @@ condor_submit_dag condor.dag
 
 Dice computed using manual vs totalsegmentator (with and without `--fast` flag) contours using dataset ped-ct-seg (n=~359) (csvs available in `results` folder).
 
-I don't quite believe the resuls yet. Some observations listed below:
+I don't quite believe the results yet (again see Dislaimer above), nevertheless, some observations are listed below:
+
+![png](results/compare.png "png")
+
++ As advertised, `--fast` indeed have a lower accuracy (assuming manual contours are good - i have not yet reviewed the ped-ct-seg contours) - not sure who got the adrenal l/r correct.
 
 + Lung & kidneys have fairly decent dice (>0.8), implying
     + [code used to download ped-ct-seg and convert to nifti](https://github.com/pangyuteng/pediatric-ct-seg) likely is correct.
     + [coded used to compute dice](process.py) between manual vs totalsegmentator contours likely is correct.
 
-+ That said, a decent amount of organs (say liver, spleen, heart and bone) that I think should have a dice > 0.6 have dice < 0.5! If model got the liver (>.6) location right, why is the spleen dice so low (<.2)? could it be due to [contrast phases](https://en.wikipedia.org/wiki/Contrast_CT). Or is it just organ size varies too much due to age that model is unable to "generalize" - sets of adults organs is "vastly" different from younger organs.
++ That said, a decent amount of organs (say liver, spleen, heart and bone) that I think should have a dice > 0.6 have dice < 0.5! If model got the liver (>.6) location right, why is the spleen dice so low (<.2)? could it be due to [contrast phases](https://en.wikipedia.org/wiki/Contrast_CT). Or is it just that organ size varies too much due to age, thus  model is unable to "generalize" - sets of adults organs is "vastly" different from younger organs...
 
-+ As advertised, `--fast` indeed have a lower accuracy (assuming manual contours are good - i have not yet reviewed the ped-ct-seg contours) - not sure who got the adrenal l/r correct.
+    + lo and behold, below shows the age vs dice plot, dice does indeed drop as age decreases. interestingly the drop varies among organ... so likely there is still bug/factors that contribute to the relatively lower dice in some organs. If we ignore adrenal, and other small organs, how come we don't see the dice/age trend in heart , bladder, and dice SD is relatively large... (again, still not ruling out potential bugs on myend, and manual countour quality - maybe there is difference in contour SOP?)
 
-![png](results/compare.png "png")
+![png](results/age-vs-dice.png "png")
 
 ## notes
 
