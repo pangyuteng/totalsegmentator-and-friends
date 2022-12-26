@@ -30,6 +30,8 @@ def main():
                 myitem[dcm_tag] = tmp_val
             else:
                 myitem[dcm_tag] = None
+        if myitem['PatientAge'] is None:
+            continue
         mylist.append(myitem)
         print(myitem)
 
