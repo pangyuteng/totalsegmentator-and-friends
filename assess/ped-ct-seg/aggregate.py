@@ -112,7 +112,7 @@ if __name__ == "__main__":
     parser.add_argument('output_folder',type=str)
     parser.add_argument('-p','--postfix',type=str,default='')
     args = parser.parse_args()
-    #main(args.root_folder,args.output_folder,args.postfix)
+    main(args.root_folder,args.output_folder,args.postfix)
     my_plots(args.root_folder,args.output_folder,args.postfix)
 """
 
