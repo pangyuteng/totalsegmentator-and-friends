@@ -7,6 +7,8 @@ import json
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set(style = 'whitegrid')
 
 def my_plots(root_folder,output_folder,postfix=''):
     
@@ -14,20 +16,26 @@ def my_plots(root_folder,output_folder,postfix=''):
 
     agg_csv_file = os.path.join(output_folder,f'agg-{postfix}.csv')
     summary_csv_file = os.path.join(output_folder,f'summary-{postfix}.csv')
-    agg_df = pd.read_csv(agg_csv_file)
+    
     df = pd.read_csv(summary_csv_file)
-    df = df.dropna()
+    df = df.dropna() 
+    df = df.reset_index()
 
-    fig = plt.figure(0)
-    n,x,y,e = df.organ_name, df.index, df.dice_mean, df.dice_sd
-    plt.errorbar(x, y, e, linestyle='None', fmt='o')
-    plt.xticks(x,n,rotation=45)
-    plt.ylabel('dice')
-    plt.grid(True)
+    agg_df = pd.read_csv(agg_csv_file)
+    mylist = []
+    for n,row in agg_df.iterrows():
+        mydict = dict(row)
+        uid = mydict.pop('uid')
+        for k,v in mydict.items():
+            item = {'uid':uid,'dice':v,'organ':k}
+            mylist.append(item)
+
+    fig, axes = plt.subplots(figsize=(10,10))
+    vdf = pd.DataFrame(mylist)
+    sns.violinplot(vdf,x='dice',y='organ', ax = axes)
     postfix_str = f'csv basename: {os.path.basename(summary_csv_file)}'
-    plt.title(f'dice between manual vs totalsegmentator\ndataset: ped-ct-seg (n=~359), {postfix_str}')
-    fig.autofmt_xdate()
-    plt.show()
+    plt.title(f'dice between manual vs totalsegmentator\ndataset: ped-ct-seg (n=~359), {postfix_str}')    
+    #plt.show()
     plt.savefig(summary_png_file)
 
 def main(root_folder,output_folder,postfix):
@@ -104,7 +112,7 @@ if __name__ == "__main__":
     parser.add_argument('output_folder',type=str)
     parser.add_argument('-p','--postfix',type=str,default='')
     args = parser.parse_args()
-    main(args.root_folder,args.output_folder,args.postfix)
+    #main(args.root_folder,args.output_folder,args.postfix)
     my_plots(args.root_folder,args.output_folder,args.postfix)
 """
 
