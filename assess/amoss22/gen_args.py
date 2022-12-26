@@ -33,7 +33,7 @@ for myitem in mylist:
         continue
     case_id = os.path.basename(image_file).replace('.nii.gz','')
     case_folder = os.path.join(root_folder,'totalseg',case_id)
-    os.makedirs(seg_folder,exist_ok=True)
+    os.makedirs(case_folder,exist_ok=True)
     item=dict(image_file=image_file,mask_file=mask_file,case_folder=case_folder)
     mylist.append(item)
 
