@@ -113,16 +113,3 @@ if __name__ == "__main__":
     score_json_file = sys.argv[5]
     main(image_nifti_file,mask_nifti_file,segmentation_folder,output_nifti_file,score_json_file)
 
-"""
-docker run -it -u $(id -u):$(id -g) \
-    -w $PWD -v /cvibraid:/cvibraid -v /radraid:/radraid \
-    pangyuteng/ml:latest bash
-
-python3 process.py \
-    /radraid/pteng/ped-ct-seg-nifti/Pediatric-CT-SEG-C26BBB5F/image.nii.gz \
-    /radraid/pteng/ped-ct-seg-nifti/Pediatric-CT-SEG-C26BBB5F/mask_preprocessed.nii.gz \
-    /radraid/pteng/ped-ct-seg-nifti/Pediatric-CT-SEG-C26BBB5F/segmentations \
-    /radraid/pteng/ped-ct-seg-nifti/Pediatric-CT-SEG-C26BBB5F/segmentations.nii.gz \
-    /radraid/pteng/ped-ct-seg-nifti/Pediatric-CT-SEG-C26BBB5F/scores.json
-
-"""
