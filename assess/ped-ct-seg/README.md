@@ -38,8 +38,8 @@ Dice computed using manual vs totalsegmentator (with and without `--fast` flag) 
 I don't quite believe the resuls yet. Some observations listed below:
 
 + Lung & kidneys have fairly decent dice (>0.8), implying
-    + code used to download ped-ct-seg and convert to nifti likely is correct.
-        https://github.com/pangyuteng/pediatric-ct-seg
+    + [code used to download ped-ct-seg and convert to nifti](https://github.com/pangyuteng/pediatric-ct-seg) likely is correct.
+    + [coded used to compute dice](process.py) between manual vs totalsegmentator contours likely is correct.
 
 + That said, a decent amount of organs (say liver, spleen, heart and bone) that I think should have a dice > 0.6 have dice < 0.5! If model got the liver (>.6) location right, why is the spleen dice so low (<.2)? could it be due to [contrast phases](https://en.wikipedia.org/wiki/Contrast_CT).
 
