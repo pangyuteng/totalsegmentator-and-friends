@@ -1,6 +1,7 @@
 #!/bin/bash
 export image_file=$1
 export seg_folder=$2
+export flags=$3
 
 export file_count=$(ls ${seg_folder}/*.nii.gz | wc -l)
 if [ -d "${seg_folder}" ]; then
@@ -11,8 +12,9 @@ if [ -d "${seg_folder}" ]; then
 fi
 
 # inference
-echo TotalSegmentator --fast -i ${image_file} -o ${seg_folder}
-TotalSegmentator --fast -i ${image_file} -o ${seg_folder}
+echo TotalSegmentator -i ${image_file} -o ${seg_folder} {flags}
+TotalSegmentator -i ${image_file} -o ${seg_folder} {flags}
+
 retVal=$?
 if [ $retVal -ne 0 ]; then
     # avoid condor stopping the entire dag
