@@ -54,5 +54,48 @@ def compare_results():
     plt.grid(True)
     plt.savefig(figure_output_path)  
 
+def results_with_age():
+    default_df = pd.read_csv('results/agg-default.csv')
+    dicom_df = pd.read_csv('results/age.csv')
+
+    mylist = []
+    for uid in default_df.uid.unique():
+
+        defaut_item = dict(default_df[default_df.uid==uid].iloc[0,:])
+        dicom_item = dict(dicom_df[dicom_df.uid==uid].iloc[0,:])
+        organ_list = sorted([x for x in defaut_item.keys() if x != 'uid'])
+
+        for organ_name in organ_list:
+
+            if np.isnan(defaut_item[organ_name]):
+                continue
+            myitem = dict(uid=uid)
+            myitem['organ']=organ_name
+            myitem['dice']=defaut_item[organ_name]
+            myitem.update(dicom_item)
+            mylist.append(myitem)
+
+    df = pd.DataFrame(mylist)
+
+    plt.figure(0,figsize=(20,10))
+    viol_plot = sns.violinplot(
+        x="organ",
+        y="dice",
+        hue="PatientAge", 
+        data=df, 
+        palette="colorblind",
+        kind='violin',
+        size = 10,
+        aspect = 1,
+        legend_out=True)
+
+    plt.title("age plotted against dice\n"+\
+        "dice between manual contours and totalsegmentator predictions, dataset ped-ct-seg n=~359)")
+
+    figure_output_path = "results/age-vs-dice.png"
+    plt.grid(True)
+    plt.savefig(figure_output_path)  
+
 if __name__ == "__main__":
-    compare_results()
+    #compare_results()
+    results_with_age()

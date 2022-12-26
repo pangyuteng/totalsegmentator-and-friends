@@ -10,8 +10,11 @@ json_file = os.path.join(root_folder,'dataset.json')
 with open(json_file,'r') as f:
     dataset_dict = json.loads(f.read())
 
-label_dict = dataset_dict['labels']
-# {"0": "background", "1": "spleen","2": "right kidney", "3": "left kidney", "4": "gall bladder", "5": "esophagus", "6": "liver", "7": "stomach", "8": "arota", "9":
+label_dict = {v:int(k) for k,v in dataset_dict['labels'].items()}
+if not os.path.exists('amos22.json'):
+    print(label_dict)
+    with open('amos22.json','w') as f:
+        f.write(json.dumps(label_dict,sort_keys=True,indent=4))
 
 datalist = []
 datalist.extend(dataset_dict['training'])

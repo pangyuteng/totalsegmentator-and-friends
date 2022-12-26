@@ -5,29 +5,31 @@ import numpy as np
 import SimpleITK as sitk
 
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
-pedctseg_json_file = os.path.join(THIS_DIR,'pedctseg.json')
+
+amos22_json_file = os.path.join(THIS_DIR,'amos22.json')
 totalsegmentator_json_file = os.path.join(THIS_DIR,'totalsegmentator.json')
-totalsegmentator2pedctseg_json_file = os.path.join(THIS_DIR,'totalsegmentator2pedctseg.json')
+totalsegmentator2amos22_json_file = os.path.join(THIS_DIR,'totalsegmentator2amos22.json')
 
 def load_mappers():
-    with open(pedctseg_json_file,'r') as f:
-        pedctseg_dict = json.loads(f.read())
+    with open(amos22_json_file,'r') as f:
+        amos22_dict = json.loads(f.read())
     with open(totalsegmentator_json_file,'r') as f:
         totalsegmentator_dict = json.loads(f.read())
-    with open(totalsegmentator2pedctseg_json_file,'r') as f:
-        totalsegmentator2pedctseg_dict = json.loads(f.read())
-    return pedctseg_dict, totalsegmentator_dict, totalsegmentator2pedctseg_dict
-pedctseg_dict, totalsegmentator_dict, totalsegmentator2pedctseg_dict = load_mappers()
+    with open(totalsegmentator2amos22_json_file,'r') as f:
+        totalsegmentator2amos22_dict = json.loads(f.read())
+    return amos22_dict, totalsegmentator_dict, totalsegmentator2amos22_dict
+amos22_dict, totalsegmentator_dict, totalsegmentator2amos22_dict = load_mappers()
 
 intersect_dict = {}
-for k,v in pedctseg_dict.items():
-    intersect_dict[k] = [q for q,t in totalsegmentator2pedctseg_dict.items() if t==v]
+for k,v in amos22_dict.items():
+    intersect_dict[k] = [q for q,t in totalsegmentator2amos22_dict.items() if t==v]
+print(intersect_dict)
+sys.exit(1)
 """
 # sample output for `intersect_dict`
-intersect_dict = { ...
-    "Thymus":[],
-    "Lung_L":['lung_lower_lobe_left.nii.gz', 'lung_upper_lobe_left.nii.gz'],
-... }
+intersect_dict {
+    'arota': ['aorta.nii.gz'],
+    'background': [], 'bladder': ['urinary_bladder.nii.gz'],...
 """
 
 
@@ -82,7 +84,7 @@ def main(image_nifti_file,mask_nifti_file,segmentation_folder,output_nifti_file,
     
     for organ_name,file_list in intersect_dict.items():
         print(organ_name)
-        ped_val = pedctseg_dict[organ_name]
+        ped_val = amos22_dict[organ_name]
         absent = np.sum(gt_mask==ped_val) == 0
         if absent: # no ground truth (no y)
             score_dict["dice"][organ_name]=None
