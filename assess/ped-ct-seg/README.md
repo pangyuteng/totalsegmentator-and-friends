@@ -31,9 +31,20 @@ condor_submit_dag condor.dag
 
 # results 
 
-dice computed using manual vs totalsegmentator (with and without `--fast` flag) contours using dataset ped-ct-seg (n=~359) (csvs available in `results` folder).
+** DISCLAIMER, results to be verified, likely bugs present in my scripts. **
 
-displaying above results ran with and without `--fast` flag
+Dice computed using manual vs totalsegmentator (with and without `--fast` flag) contours using dataset ped-ct-seg (n=~359) (csvs available in `results` folder).
+
+I don't quite believe the resuls yet. Some observations listed below:
+
++ Lung & kidneys have fairly decent dice (>0.8), implying
+    + code used to download ped-ct-seg and convert to nifti likely is correct.
+        https://github.com/pangyuteng/pediatric-ct-seg
+
++ That said, a decent amount of organs (say liver, spleen, heart and bone) that I think should have a dice > 0.6 have dice < 0.5! If model got the liver (>.6) location right, why is the spleen dice so low (<.2)? could it be due to [contrast phases](https://en.wikipedia.org/wiki/Contrast_CT).
+
++ As advertised, `--fast` indeed have a lower accuracy (assuming manual contours are good - i have not yet reviewed the ped-ct-seg contours) - not sure who got the adrenal l/r correct.
+
 ![png](results/compare.png "png")
 
 ## notes
