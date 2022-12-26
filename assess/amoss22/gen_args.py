@@ -31,7 +31,7 @@ for myitem in mylist:
     if not os.path.exists(mask_file):
         warnings.warn(f'missing mask_file {x}')
         continue
-    case_id = os.path.basename(image_file).repace('.nii.gz','')
+    case_id = os.path.basename(image_file).replace('.nii.gz','')
     case_folder = os.path.join(root_folder,'totalseg',case_id)
     os.makedirs(seg_folder,exist_ok=True)
     item=dict(image_file=image_file,mask_file=mask_file,case_folder=case_folder)
