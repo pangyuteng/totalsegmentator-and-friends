@@ -23,6 +23,12 @@ def main(root_folder,output_folder):
     print(root_folder)
     for path in Path(root_folder).rglob("*scores.json"):
         json_file_list.append(str(path))
+    case_set = set(os.listdir(root_folder))
+    case_with_json_set = set([os.path.basename(os.path.dirname(x)) for x in json_file_list])
+
+    print('cases with missing json file:',case_set-case_with_json_set)
+    print(len(json_file_list))
+    assert(len(json_file_list)==359)
 
     mylist = []
     for x in json_file_list:

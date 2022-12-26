@@ -6,7 +6,6 @@ root_folder = os.path.abspath(sys.argv[1])
 csv_folder = os.path.abspath(sys.argv[2])
 
 folder_list = [os.path.join(root_folder,x) for x in os.listdir(root_folder) if os.path.isdir(os.path.join(root_folder,x))]
-#assert(len(folder_list)==359)
 
 mylist = []
 for x in folder_list:
@@ -20,6 +19,8 @@ for x in folder_list:
         continue
     item=dict(folder=x,image_file=image_file,mask_file=mask_file)
     mylist.append(item)
+
+assert(len(mylist)==359)
 
 with open('inference.args','w') as f:
     for n,mydict in enumerate(mylist):

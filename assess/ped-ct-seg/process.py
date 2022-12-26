@@ -86,6 +86,7 @@ def main(image_nifti_file,mask_nifti_file,segmentation_folder,output_nifti_file,
         absent = np.sum(gt_mask==ped_val) == 0
         if absent: # no ground truth (no y)
             score_dict["dice"][organ_name]=None
+            print('    L---- absent')
             continue
         if len(file_list)==0: # no yhat
             score_dict["dice"][organ_name]=None
