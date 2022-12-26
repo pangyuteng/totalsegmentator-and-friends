@@ -6,13 +6,37 @@ from pathlib import Path
 import json
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
-def main(root_folder,output_folder):
+def my_plots(root_folder,output_folder,postfix=''):
+    
+    summary_png_file = os.path.join(output_folder,f'summary-{postfix}.png')    
 
+    agg_csv_file = os.path.join(output_folder,f'agg-{postfix}.csv')
+    summary_csv_file = os.path.join(output_folder,f'summary-{postfix}.csv')
+    agg_df = pd.read_csv(agg_csv_file)
+    df = pd.read_csv(summary_csv_file)
+    df = df.dropna()
+
+    fig = plt.figure(0)
+    n,x,y,e = df.organ_name, df.index, df.dice_mean, df.dice_sd
+    plt.errorbar(x, y, e, linestyle='None', fmt='o')
+    plt.xticks(x,n,rotation=45)
+    plt.ylabel('dice')
+    plt.grid(True)
+    postfix_str = '' if postfix == '' else f'postfix: {postfix}'
+    plt.title('dice between manual vs totalsegmentator\ndataset: ped-ct-seg (n=~359), {postfix_str}')
+    fig.autofmt_xdate()
+    plt.show()
+    plt.savefig(summary_png_file)
+
+def main(root_folder,output_folder,postfix):
+    
     os.makedirs(output_folder,exist_ok=True)
     
-    agg_csv_file = os.path.join(output_folder,'agg.csv')
-    summary_csv_file = os.path.join(output_folder,'summary.csv')
+    agg_csv_file = os.path.join(output_folder,f'agg-{postfix}.csv')
+    summary_csv_file = os.path.join(output_folder,f'summary-{postfix}.csv')
+    
 
     if os.path.exists(agg_csv_file):
         raise ValueError("csv file found, please manually delete!")
@@ -72,15 +96,16 @@ def main(root_folder,output_folder):
     df = df.dropna()
     print(f'dice score of organs predicted TotalSegmentator(dataset: ped-ct-org, n={sample_n})')
     print(df)
-
+    
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('root_folder',type=str)
     parser.add_argument('output_folder',type=str)
+    parser.add_argument('-p','--postfix',type=str,default='')
     args = parser.parse_args()
-    main(args.root_folder,args.output_folder)
-
+    main(args.root_folder,args.output_folder,args.postfix)
+    my_plots(args.root_folder,args.output_folder,args.postfix)
 """
 
 python aggregate.py ${root_folder} ${output_folder}
