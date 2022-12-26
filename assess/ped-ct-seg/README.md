@@ -41,7 +41,7 @@ I don't quite believe the resuls yet. Some observations listed below:
     + [code used to download ped-ct-seg and convert to nifti](https://github.com/pangyuteng/pediatric-ct-seg) likely is correct.
     + [coded used to compute dice](process.py) between manual vs totalsegmentator contours likely is correct.
 
-+ That said, a decent amount of organs (say liver, spleen, heart and bone) that I think should have a dice > 0.6 have dice < 0.5! If model got the liver (>.6) location right, why is the spleen dice so low (<.2)? could it be due to [contrast phases](https://en.wikipedia.org/wiki/Contrast_CT).
++ That said, a decent amount of organs (say liver, spleen, heart and bone) that I think should have a dice > 0.6 have dice < 0.5! If model got the liver (>.6) location right, why is the spleen dice so low (<.2)? could it be due to [contrast phases](https://en.wikipedia.org/wiki/Contrast_CT). Or is it just organ size varies too much due to age that model is unable to "generalize" - sets of adults organs is "vastly" different from younger organs.
 
 + As advertised, `--fast` indeed have a lower accuracy (assuming manual contours are good - i have not yet reviewed the ped-ct-seg contours) - not sure who got the adrenal l/r correct.
 
@@ -51,8 +51,8 @@ I don't quite believe the resuls yet. Some observations listed below:
 
 something doesn't seem right...
 
-http://192.168.68.138/compare?case_id=Pediatric-CT-SEG-03A54FD1&dataset=ped-ct-seg
-http://192.168.68.138/compare?case_id=Pediatric-CT-SEG-02AC04B6&dataset=ped-ct-seg
+http://gtx.local/compare?case_id=Pediatric-CT-SEG-03A54FD1&dataset=ped-ct-seg
+http://gtx.local/compare?case_id=Pediatric-CT-SEG-02AC04B6&dataset=ped-ct-seg
 
 ## containers used in condor jobs
 
