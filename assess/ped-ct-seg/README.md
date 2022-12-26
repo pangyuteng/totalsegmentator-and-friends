@@ -29,6 +29,26 @@ rm condor.dag.* docker_stderror log/* results/*.csv
 condor_submit_dag condor.dag
 ```
 
+# results 
+
+computing dice with manual vs totalsegmentator (with and without `--fast` flag) using dataset ped-ct-seg (n=~359)
+
+dice(manual,totalsegmentator-default)
+![png](results/summary-default.png "png")
+
+dice(manual,totalsegmentator-fast)
+![png](results/summary-default.png "png")
+
+displaying above results ran with and without `--fast` flag
+![png](results/compare.png "png")
+
+## notes
+
+something doesn't seem right...
+
+http://192.168.68.138/compare?case_id=Pediatric-CT-SEG-03A54FD1&dataset=ped-ct-seg
+http://192.168.68.138/compare?case_id=Pediatric-CT-SEG-02AC04B6&dataset=ped-ct-seg
+
 ## containers used in condor jobs
 
 https://github.com/wasserth/TotalSegmentator/blob/master/Dockerfile
