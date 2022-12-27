@@ -19,5 +19,5 @@ condor_subit_dag condor_dag
 
 Dice computed between manual contours and TotalSegmentor predictions using dataset AMOS2022 (n=359*)
 
-![png](results/compare.png "png")
+![png](results/summary-default.png "png")
 * n=240 in imagesTr,n=120 in imagesVa, excluded `imagesTr/amos_0518.nii.gz` since is not CT, but more like MR.
