@@ -43,9 +43,7 @@ docker compose up
 
     + [Pediatric-CT-SEG assessment](assess/ped-ct-seg/README.md#results)
 
-    + [AMOS2022 assessment](assess/amoss22/README.md#results)
-
-
+    + [AMOS2022 assessment](assess/amos22/README.md#results)
 
 
 #### misc
