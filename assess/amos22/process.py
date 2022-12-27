@@ -6,16 +6,16 @@ import SimpleITK as sitk
 
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
-amos22_json_file = os.path.join(THIS_DIR,'amos22.json')
-totalsegmentator_json_file = os.path.join(THIS_DIR,'totalsegmentator.json')
-totalsegmentator2amos22_json_file = os.path.join(THIS_DIR,'totalsegmentator2amos22.json')
+totalsegmentator_json_file = os.path.join(os.path.dirname(THIS_DIR),'totalsegmentator.json')
+dataset_json_file = os.path.join(THIS_DIR,'dataset.json')
+mapper_json_file = os.path.join(THIS_DIR,'mapper.json')
 
 def load_mappers():
-    with open(amos22_json_file,'r') as f:
+    with open(dataset_json_file,'r') as f:
         amos22_dict = json.loads(f.read())
     with open(totalsegmentator_json_file,'r') as f:
         totalsegmentator_dict = json.loads(f.read())
-    with open(totalsegmentator2amos22_json_file,'r') as f:
+    with open(mapper_json_file,'r') as f:
         totalsegmentator2amos22_dict = json.loads(f.read())
     return amos22_dict, totalsegmentator_dict, totalsegmentator2amos22_dict
 amos22_dict, totalsegmentator_dict, totalsegmentator2amos22_dict = load_mappers()

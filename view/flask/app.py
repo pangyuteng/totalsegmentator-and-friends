@@ -3,16 +3,16 @@ import sys
 import json
 import argparse
 from pathlib import Path
-import json
 import pandas as pd
-
 from flask import (
     Flask, render_template, request, jsonify
 )
+from utils import TOTALSEG_MAXVAL,load_json
 
 DATADIR_TOTALSEG = os.environ.get('DATADIR_TOTALSEG')
 DATADIR_PEDCTSEG = os.environ.get('DATADIR_PEDCTSEG')
 DATADIR_AMOS22 = os.environ.get('DATADIR_AMOS22')
+THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
 app = Flask(__name__,
     static_url_path='/static',
@@ -48,16 +48,16 @@ with open(amos22_json_file,'r') as f:
 @app.route('/compare')
 def compare():
     case_id = request.args.get('case_id')
-    dataset = request.args.get('dataset')
-    totalseg_max=104
-    if dataset == "ped-ct-seg":
+    dataset_name = request.args.get('dataset_name')
+
+    if dataset_name == "ped-ct-seg":
         manual_max=27
         case_folder = os.path.join(DATADIR_PEDCTSEG,case_id)
         image_file = os.path.join(case_folder,'image.nii.gz')
         manual_mask_file = os.path.join(case_folder,'mask_preprocessed.nii.gz')
         totalseg_mask_file = os.path.join(case_folder,'segmentations.nii.gz')
 
-    if dataset == "amos22":
+    if dataset_name == "amos22":
         manual_max=15
         if case_id in amos22_train_list:
             img_folder = 'imagesTr'
@@ -76,14 +76,21 @@ def compare():
         case_folder = os.path.join(root_dir,case_id)
         totalseg_mask_file = os.path.join(case_folder,'segmentations.nii.gz')
 
+    dataset_lut_file = os.path.join(THIS_DIR,'static',f'dataset-{dataset_name}.json')
+    totalseg_lut_file = os.path.join(THIS_DIR,'static',f'totalseg-{dataset_name}.json')
+    dataset_lut = load_json(dataset_lut_file)
+    totalseg_lut = load_json(totalseg_lut_file)
+    dataset_max = len(dataset_lut)-1 # minus 1 for "color of value 0" in lut
+
     app.logger.info(image_file)
     app.logger.info(manual_mask_file)
     app.logger.info(totalseg_mask_file)
 
     return render_template("compare.html",
-        dataset = dataset,
-        manual_max=manual_max,
-        totalseg_max=totalseg_max,
+        dataset_name = dataset_name,
+        dataset_max=dataset_max,
+        dataset_lut=dataset_lut,
+        totalseg_max=TOTALSEG_MAXVAL,        
         case_id = case_id,
         image_file = image_file,
         manual_mask_file = manual_mask_file,
@@ -135,7 +142,7 @@ def pet_ct_seg():
 
     df = pd.DataFrame(mylist)
     df["case_id"] = df["case_id"].apply(
-        lambda x: f"""<a href="/compare?case_id={x}&dataset=ped-ct-seg">{x}</a>"""
+        lambda x: f"""<a href="/compare?case_id={x}&dataset_name=ped-ct-seg">{x}</a>"""
     )
     table = df.to_html(
         table_id="my_table",index=False,header="true",
@@ -175,7 +182,7 @@ def amos22():
 
     df = pd.DataFrame(mylist)
     df["case_id"] = df["case_id"].apply(
-        lambda x: f"""<a href="/compare?case_id={x}&dataset=amos22">{x}</a>"""
+        lambda x: f"""<a href="/compare?case_id={x}&dataset_name=amos22">{x}</a>"""
     )
     table = df.to_html(
         table_id="my_table",index=False,header="true",

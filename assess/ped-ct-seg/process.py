@@ -5,16 +5,17 @@ import numpy as np
 import SimpleITK as sitk
 
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
-pedctseg_json_file = os.path.join(THIS_DIR,'pedctseg.json')
-totalsegmentator_json_file = os.path.join(THIS_DIR,'totalsegmentator.json')
-totalsegmentator2pedctseg_json_file = os.path.join(THIS_DIR,'totalsegmentator2pedctseg.json')
+
+totalsegmentator_json_file = os.path.join(os.path.dirname(THIS_DIR),'totalsegmentator.json')
+dataset_json_file = os.path.join(THIS_DIR,'dataset.json')
+mapper_json_file = os.path.join(THIS_DIR,'mapper.json')
 
 def load_mappers():
-    with open(pedctseg_json_file,'r') as f:
+    with open(dataset_json_file,'r') as f:
         pedctseg_dict = json.loads(f.read())
     with open(totalsegmentator_json_file,'r') as f:
         totalsegmentator_dict = json.loads(f.read())
-    with open(totalsegmentator2pedctseg_json_file,'r') as f:
+    with open(mapper_json_file,'r') as f:
         totalsegmentator2pedctseg_dict = json.loads(f.read())
     return pedctseg_dict, totalsegmentator_dict, totalsegmentator2pedctseg_dict
 pedctseg_dict, totalsegmentator_dict, totalsegmentator2pedctseg_dict = load_mappers()

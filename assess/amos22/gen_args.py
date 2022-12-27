@@ -11,9 +11,10 @@ with open(json_file,'r') as f:
     dataset_dict = json.loads(f.read())
 
 label_dict = {v:int(k) for k,v in dataset_dict['labels'].items()}
-if not os.path.exists('amos22.json'):
+label_dict.pop("background")
+if not os.path.exists('dataset.json'):
     print(label_dict)
-    with open('amos22.json','w') as f:
+    with open('dataset.json','w') as f:
         f.write(json.dumps(label_dict,sort_keys=True,indent=4))
 
 datalist = []
