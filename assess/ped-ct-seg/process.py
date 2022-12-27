@@ -6,7 +6,7 @@ import SimpleITK as sitk
 
 THIS_DIR = os.path.dirname(os.path.abspath(__file__))
 
-totalsegmentator_json_file = os.path.join(os.path.dirname(THIS_DIR),'totalsegmentator.json')
+totalsegmentator_json_file = os.path.join(THIS_DIR,'totalsegmentator.json')
 dataset_json_file = os.path.join(THIS_DIR,'dataset.json')
 mapper_json_file = os.path.join(THIS_DIR,'mapper.json')
 
