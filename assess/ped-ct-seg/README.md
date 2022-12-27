@@ -65,6 +65,7 @@ http://gtx.local/compare?case_id=Pediatric-CT-SEG-02AC04B6&dataset=ped-ct-seg
 ## containers used in condor jobs
 
 https://github.com/wasserth/TotalSegmentator/blob/master/Dockerfile
+
 https://github.com/pangyuteng/totalsegmentator-and-friends/blob/main/assess/docker-with-weights/Dockerfile
 ``` # contains model weights as one layer
 docker pull pangyuteng/totalsegmentator:latest
