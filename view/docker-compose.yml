@@ -6,8 +6,6 @@ services:
             context: nginx
             dockerfile: Dockerfile
         restart: always
-        volumes:
-            - /mnt:/mnt
         ports:
             - 80:80
     flask:
@@ -16,12 +14,7 @@ services:
             dockerfile: Dockerfile
         restart: always
         command: python app.py
-        environment:
-            - DATADIR_TOTALSEG=/mnt/scratch/data/Totalsegmentator_dataset
-            - DATADIR_PEDCTSEG=/mnt/scratch/data/ped-ct-seg-nifti
-            - DATADIR_AMOS22=/mnt/scratch/data/amos22
-        volumes:
-            - /mnt:/mnt
-            - ${PWD}/flask:/opt
+        env_file:
+            - .env
         expose:
             - 5000

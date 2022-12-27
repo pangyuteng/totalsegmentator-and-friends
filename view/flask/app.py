@@ -38,27 +38,58 @@ def review():
         mask_basename = os.path.basename(mask_file),
     )
 
+amos22_json_file = os.path.join(DATADIR_AMOS22,'dataset.json')
+with open(amos22_json_file,'r') as f:
+    amos22_dict = json.loads(f.read())
+    amos22_train_list = [  os.path.basename(x['image']).replace(".nii.gz","") for x in amos22_dict['training']  ]
+    amos22_val_list = [  os.path.basename(x['image']).replace(".nii.gz","") for x in amos22_dict['validation']  ]
+
+""
 @app.route('/compare')
 def compare():
     case_id = request.args.get('case_id')
     dataset = request.args.get('dataset')
+    totalseg_max=104
     if dataset == "ped-ct-seg":
+        manual_max=27
         case_folder = os.path.join(DATADIR_PEDCTSEG,case_id)
         image_file = os.path.join(case_folder,'image.nii.gz')
-        pedctseg_mask_file = os.path.join(case_folder,'mask_preprocessed.nii.gz')
+        manual_mask_file = os.path.join(case_folder,'mask_preprocessed.nii.gz')
         totalseg_mask_file = os.path.join(case_folder,'segmentations.nii.gz')
 
-        app.logger.info(image_file)
-        app.logger.info(pedctseg_mask_file)
-        app.logger.info(totalseg_mask_file)
+    if dataset == "amos22":
+        manual_max=15
+        if case_id in amos22_train_list:
+            img_folder = 'imagesTr'
+            label_folder = 'labelsTr'
+        elif case_id in amos22_val_list:
+            img_folder = 'imagesVa'
+            label_folder = 'labelsVa'
+        else:
+            raise NotImplemented()
+        image_file = os.path.join(DATADIR_AMOS22,img_folder,f'{case_id}.nii.gz')
+        src_manual_mask_file = os.path.join(DATADIR_AMOS22,label_folder,f'{case_id}.nii.gz')
+        manual_mask_file = os.path.join(DATADIR_AMOS22,label_folder,f'{case_id}_mask.nii.gz')
+        os.symlink(src_manual_mask_file,manual_mask_file)
+
+        root_dir = os.path.join(DATADIR_AMOS22,'totalseg')
+        case_folder = os.path.join(root_dir,case_id)
+        totalseg_mask_file = os.path.join(case_folder,'segmentations.nii.gz')
+
+    app.logger.info(image_file)
+    app.logger.info(manual_mask_file)
+    app.logger.info(totalseg_mask_file)
 
     return render_template("compare.html",
+        dataset = dataset,
+        manual_max=manual_max,
+        totalseg_max=totalseg_max,
         case_id = case_id,
         image_file = image_file,
-        pedctseg_mask_file = pedctseg_mask_file,
+        manual_mask_file = manual_mask_file,
         totalseg_mask_file = totalseg_mask_file,
         image_basename = os.path.basename(image_file),
-        pedctseg_mask_basename = os.path.basename(pedctseg_mask_file),
+        manual_mask_basename = os.path.basename(manual_mask_file),
         totalseg_mask_basename = os.path.basename(totalseg_mask_file),
     )
 
@@ -116,8 +147,43 @@ def pet_ct_seg():
 
 @app.route('/amos22')
 def amos22():
-    df=os.listdir(DATADIR_AMOS22)
-    return render_template("amos22.html",df=df)
+    root_dir = os.path.join(DATADIR_AMOS22,'totalseg')
+    json_file_list = []
+    for path in Path(root_dir).rglob("*scores.json"):
+        json_file_list.append(str(path))
+    json_file_list = sorted(json_file_list)
+    mylist = []
+    organ_list = None
+    for json_file in json_file_list:
+
+        with open(json_file,'r') as f:
+            results_dict = json.loads(f.read())
+
+        if organ_list is None:
+            organ_list = sorted(list(results_dict['dice'].keys()))
+
+        case_id = os.path.basename(os.path.dirname(json_file))
+        item = dict(
+            case_id=case_id,
+        )
+        for organ_name in organ_list:
+            if organ_name in results_dict['dice'].keys():
+                item[organ_name]=results_dict['dice'][organ_name]
+            else:
+                item[organ_name]="NA"
+        mylist.append(item)
+
+    df = pd.DataFrame(mylist)
+    df["case_id"] = df["case_id"].apply(
+        lambda x: f"""<a href="/compare?case_id={x}&dataset=amos22">{x}</a>"""
+    )
+    table = df.to_html(
+        table_id="my_table",index=False,header="true",
+        classes="display",border=0,
+        render_links=True,escape=False,
+    )
+
+    return render_template("amos22.html",df=df,table=table)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

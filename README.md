@@ -30,9 +30,11 @@ docker run -it -u $(id -u):$(id -g) -e DATADIR --init \
     -w ${PWD} -v /mnt:/mnt totalsegmentator-dataset-viewer-flask bash
 python prepare.py
 
-# update volumes and environment variables in `docker-compose.yml` , and run below
-
-docker compose up
+# 
+#
+# create `.env` and `volume.yml`, see examples: `.env.SAMPLE` and `volume.yml.SAMPLE`
+# 
+docker compose -f docker-compose.yml -f volume.yml up
 
 ```
 
