@@ -27,14 +27,17 @@ def my_plots(root_folder,output_folder,postfix=''):
         mydict = dict(row)
         uid = mydict.pop('uid')
         for k,v in mydict.items():
+            if k in ['background','prostate/uterus']:
+                continue
             item = {'uid':uid,'dice':v,'organ':k}
             mylist.append(item)
 
     fig, axes = plt.subplots(figsize=(10,10))
     vdf = pd.DataFrame(mylist)
     sns.violinplot(vdf,x='dice',y='organ', ax = axes)
-    postfix_str = f'csv basename: {os.path.basename(summary_csv_file)}'
-    plt.title(f'dice between manual vs totalsegmentator\ndataset: ped-ct-seg (n=~359), {postfix_str}')
+    postfix_str = f'csv basename: {os.path.basename(summary_csv_file)}, \n *one case (amos_0518) excluded, modality was MR not CT.'
+    plt.title(f'dice between manual vs totalsegmentator\ndataset: amos2022 (n={len(agg_df)}*), {postfix_str}')
+    plt.yticks(rotation=45)
     plt.grid(True)
     plt.savefig(summary_png_file)
 

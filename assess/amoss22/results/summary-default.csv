@@ -1,0 +1,17 @@
+organ_name,dice_median,dice_mean,dice_sd,n
+arota,0.9141,0.8862,0.1211,360.0
+background,,,,
+bladder,0.8436,0.772,0.2021,296.0
+duodenum,0.7152,0.6401,0.207,359.0
+esophagus,0.8073,0.7504,0.1712,359.0
+gall bladder,0.8574,0.7431,0.258,337.0
+left adrenal gland,0.7374,0.6589,0.2211,360.0
+left kidney,0.9507,0.9121,0.149,359.0
+liver,0.9623,0.9368,0.1098,360.0
+pancreas,0.834,0.773,0.1696,360.0
+postcava,0.8139,0.7685,0.1505,360.0
+prostate/uterus,,,,
+right adrenal gland,0.7142,0.6484,0.2059,359.0
+right kidney,0.9493,0.8993,0.1695,358.0
+spleen,0.9504,0.92,0.128,357.0
+stomach,0.9154,0.8594,0.1622,357.0
