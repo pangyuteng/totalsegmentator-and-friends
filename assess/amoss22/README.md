@@ -17,7 +17,7 @@ condor_subit_dag condor_dag
 
 # results
 
-Dice computed between manual contours and TotalSegmentor predictions using dataset AMOS2022 (n=359*)
+Dice computed between manual contours and TotalSegmentor predictions using dataset AMOS2022 (n=357*)
 
 ![png](results/summary-default.png "png")
-* n=240 in imagesTr,n=120 in imagesVa, excluded `imagesTr/amos_0518.nii.gz` since is not CT, but more like MR.
+* 3 of 360 cases excluded, modality was MR not CT
