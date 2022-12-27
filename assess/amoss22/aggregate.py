@@ -39,7 +39,8 @@ def my_plots(root_folder,output_folder,postfix=''):
     plt.savefig(summary_png_file)
 
 def main(root_folder,output_folder,postfix):
-    
+    root_folder = os.path.join(root_folder,'totalseg')
+
     os.makedirs(output_folder,exist_ok=True)
     
     agg_csv_file = os.path.join(output_folder,f'agg-{postfix}.csv')
@@ -60,7 +61,7 @@ def main(root_folder,output_folder,postfix):
 
     print('cases with missing json file:',case_set-case_with_json_set)
     print(len(json_file_list))
-    assert(len(json_file_list)==359)
+    assert(len(json_file_list)==360)
 
     mylist = []
     for x in json_file_list:

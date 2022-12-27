@@ -2,7 +2,7 @@ universe = docker
 docker_image = pangyuteng/ml:latest
 
 executable = process.sh
-transfer_input_files = process.sh,process.py,pedctseg.json,totalsegmentator.json,totalsegmentator2pedctseg.json
+transfer_input_files = process.sh,process.py,amos22.json,totalsegmentator.json,totalsegmentator2amos22.json
 should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
 
