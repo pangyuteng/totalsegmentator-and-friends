@@ -41,8 +41,16 @@ docker compose up
 
 + for assessment on how it compares to manual contours in other datasets, see:
 
-    + assess/ped-ct-seg/README.md
+    + [Pediatric-CT-SEG assessment](assess/ped-ct-seg/README.md)
 
-    + TODO: assess/amos2022/README.md
+    + [AMOS2022 assessment](assess/amos2022/README.md)
 
 
+
+
+#### misc
+
+```
+There are only two hard things in Computer Science: cache invalidation and naming things.
+-- Phil Karlton
+```
