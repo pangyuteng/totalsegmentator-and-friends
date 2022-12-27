@@ -41,9 +41,9 @@ docker compose up
 
 + for assessment on how it compares to manual contours in other datasets, see:
 
-    + [Pediatric-CT-SEG assessment](assess/ped-ct-seg/README.md)
+    + [Pediatric-CT-SEG assessment](assess/ped-ct-seg/README.md#results)
 
-    + [AMOS2022 assessment](assess/amos2022/README.md)
+    + [AMOS2022 assessment](assess/amoss22/README.md#results)
 
 
 
