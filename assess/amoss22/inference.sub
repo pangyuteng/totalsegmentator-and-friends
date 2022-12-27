@@ -15,7 +15,7 @@ output = log/inference.$(cluster).$(process).out
 # ^^^ a few not running, trying out gpu with >20GB RAM
 
 requirements = (OpSys == "LINUX" && Arch == "X86_64" && GPUMEM > 10000 )
-request_cpus = 1
+request_cpus = 4
 request_gpus = 1
 request_memory = 20GB
 request_disk = 20GB
