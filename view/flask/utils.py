@@ -22,12 +22,16 @@ rand_color_with_val_infront = lambda x: [x,np.round(random.random(),2),np.round(
 # look-up-table creation for papaya
 def create_lut(dataset_json_file,mapper_json_file,totalseg_maxval=TOTALSEG_MAXVAL):
 
-    dataset_dict = load_json(dataset_json_file)
+    unsorted_dataset_dict = load_json(dataset_json_file)
+    # sort by value in dict prior lut creation
+    dataset_list = sorted(unsorted_dataset_dict.items(), key=lambda x: x[1]) # sort by keys
+    dataset_dict = {k:v for k,v in dataset_list}
     dataset_maxval = len(dataset_dict)
 
     # create LUT for manual contours
     color_dict = {}
     dataset_color_list = [[0,0,0,0]]
+
     for k,v in dataset_dict.items():
         color_dict[v]= rand_color()
         scaled_val = np.round(v/dataset_maxval,3)

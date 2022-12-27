@@ -70,7 +70,8 @@ def compare():
         image_file = os.path.join(DATADIR_AMOS22,img_folder,f'{case_id}.nii.gz')
         src_manual_mask_file = os.path.join(DATADIR_AMOS22,label_folder,f'{case_id}.nii.gz')
         manual_mask_file = os.path.join(DATADIR_AMOS22,label_folder,f'{case_id}_mask.nii.gz')
-        os.symlink(src_manual_mask_file,manual_mask_file)
+        if not os.path.exists(manual_mask_file):
+            os.symlink(src_manual_mask_file,manual_mask_file)
 
         root_dir = os.path.join(DATADIR_AMOS22,'totalseg')
         case_folder = os.path.join(root_dir,case_id)
@@ -90,7 +91,8 @@ def compare():
         dataset_name = dataset_name,
         dataset_max=dataset_max,
         dataset_lut=dataset_lut,
-        totalseg_max=TOTALSEG_MAXVAL,        
+        totalseg_max=TOTALSEG_MAXVAL,
+        totalseg_lut=totalseg_lut,
         case_id = case_id,
         image_file = image_file,
         manual_mask_file = manual_mask_file,
