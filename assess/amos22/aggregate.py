@@ -23,7 +23,9 @@ def my_plots(root_folder,output_folder,postfix=''):
 
 
     agg_df = pd.read_csv(agg_csv_file)
-    exclude_list = ['amos_0518','amos_0517','amos_0540']
+    with open('likely-MRs.json','r') as f:
+        exclude_list = json.loads(f.read())
+
     agg_df = agg_df[agg_df.uid.apply(lambda x: x not in exclude_list)]
     mylist = []
     
@@ -39,7 +41,7 @@ def my_plots(root_folder,output_folder,postfix=''):
     fig, axes = plt.subplots(figsize=(10,10))
     vdf = pd.DataFrame(mylist)
     sns.violinplot(vdf,x='dice',y='organ', ax = axes)
-    postfix_str = f'csv basename: {os.path.basename(summary_csv_file)}, \n *3 of 360 cases excluded, modality was MR not CT.'
+    postfix_str = f'csv basename: {os.path.basename(summary_csv_file)}, \n *{len(exclude_list)} of 360 cases excluded, modality was MR not CT.'
     plt.title(f'dice between manual vs totalsegmentator\ndataset: amos2022 (n={len(agg_df)}*), {postfix_str}')
     plt.yticks(rotation=45)
     plt.grid(True)

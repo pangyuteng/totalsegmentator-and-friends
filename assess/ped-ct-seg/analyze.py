@@ -125,11 +125,10 @@ def results_with_age():
         inner='box',scale='width', cut=1, linewidth=0.25, legend_out=True,
     )
     plt.xticks(rotation=45)
-    plt.title(
-        "Age plotted against dice by organ.\n"+\
-        "(Dice between manual contours and TotalSegmentator predictions, dataset used Pediatric-CT-SEG n=~359.\n"+\
-        "github@s: TotalSegmentator @wasserth, Pediatric-CT-SEG @jordanpn, plot by @pangyuteng 2022-12-26"
-    )
+    text = "Age plotted against dice by organ.\n"\
+    "(Dice between manual contours and TotalSegmentator predictions, dataset used Pediatric-CT-SEG n=~359.\n"\
+    "github@s: TotalSegmentator @wasserth, Pediatric-CT-SEG @jordanpn, plot by @pangyuteng 2023-01-12"
+    plt.title(text)
 
     figure_output_path = "results/age-vs-dice-all.png"
     plt.grid(True)
@@ -144,12 +143,10 @@ def results_with_age():
         data=df,x="organ",y="dice",hue="PatientAge",
         inner='box',scale='width', cut=1, linewidth=1, legend_out=True,
     )
-
-    plt.title(
-        f"Age plotted against dice in {organ}.\n"+\
-        "(Dice between manual contours and TotalSegmentator predictions, dataset used Pediatric-CT-SEG n=~359.\n"+\
-        "github@s: TotalSegmentator @wasserth, Pediatric-CT-SEG @jordanpn, plot by @pangyuteng 2022-12-26"
-    )
+    text = f"Age plotted against dice in {organ}.\n"\
+    "(Dice between manual contours and TotalSegmentator predictions, dataset used Pediatric-CT-SEG n=~359.\n"\
+    "github@s: TotalSegmentator @wasserth, Pediatric-CT-SEG @jordanpn, plot by @pangyuteng 2023-01-12"
+    plt.title(text)
 
     figure_output_path = f"results/age-vs-dice-{organ}.png"
     plt.grid(True)

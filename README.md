@@ -53,4 +53,7 @@ docker compose -f docker-compose.yml -f volume.yml up
 ```
 There are only two hard things in Computer Science: cache invalidation and naming things.
 -- Phil Karlton
+
+Hence this repo name, the alternative would be totalsegmentator-misc-$(openssl rand -hex 4)
+
 ```
