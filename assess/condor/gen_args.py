@@ -22,7 +22,7 @@ for n,row in df.iterrows():
 
 with open('my.args','w') as f:
     for n,x in enumerate(mylist):
-        myline = f"na {x['nifti_image_path']} {x['totalseg_folder']}\n"
+        myline = f"{x['nifti_image_path']} {x['totalseg_folder']}\n"
         f.write(myline)
 
 """
