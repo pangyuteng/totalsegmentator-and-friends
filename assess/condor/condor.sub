@@ -11,7 +11,7 @@ log = log/$(cluster).$(process).log
 error = log/$(cluster).$(process).err
 output = log/$(cluster).$(process).out
 
-requirements = (OpSys == "LINUX" && Arch == "X86_64" && GPUMEM < 20000 ) 
+requirements = (OpSys == "LINUX" && Arch == "X86_64" && GPUMEM > 20000 )
 
 request_cpus = 1
 request_gpus = 1
