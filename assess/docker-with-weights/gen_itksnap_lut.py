@@ -2,7 +2,7 @@ import os
 import sys
 from totalsegmentator.map_to_binary import class_map
 import numpy as np
-np.random.seed(42)
+np.random.seed(0)
 
 def main(output_file):
     mylines = '0   0   0   0    0 0 0 "Back Ground"\n'
