@@ -1,0 +1,29 @@
+
+universe = docker
+docker_image = registry.cvib.ucla.edu/pteng:lungseg2023
+docker_pull_policy = always
+
+executable = run.sh
+should_transfer_files = YES
+transfer_input_files = run.sh
+
+#requirements = ( Machine  == "REDLRADADM23620.ad.medctr.ucla.edu" ||  Machine  == "REDLRADADM23621.ad.medctr.ucla.edu")
+#requirements = Machine  == "REDLRADADM23710.ad.medctr.ucla.edu"
+#requirements = Machine  == "REDLRADADM14959.ad.medctr.ucla.edu"
+#requirements = (OpSys == "LINUX" && Arch == "X86_64" && GPUMEM > 10000)
+#requirements = (OpSys == "LINUX" && Arch == "X86_64" && GPUMEM > 40000)
+
+requirements = Machine  == "REDLRADADM14959.ad.medctr.ucla.edu"
+
+when_to_transfer_output = ON_EXIT
+output = joblog/$(cluster).$(process).out
+error = joblog/$(cluster).$(process).err
+log = joblog/$(cluster).$(process).log
+
+request_cpus = 2
+request_gpus = 1
+request_memory = 30G
+#request_disk = 5GB
+
+arguments = "hello world"
+queue
