@@ -1,2 +1,2 @@
-DOCKER_BUILDKIT=1 docker build -t registry.cvib.ucla.edu/pteng:lungseg2023 .
-docker push registry.cvib.ucla.edu/pteng:lungseg2023
+DOCKER_BUILDKIT=1 docker build -t pangyuteng/lungseg2023:latest .
+docker push pangyuteng/lungseg2023:latest
