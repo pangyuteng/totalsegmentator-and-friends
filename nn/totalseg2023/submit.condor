@@ -1,19 +1,13 @@
 
 universe = docker
-docker_image = registry.cvib.ucla.edu/pteng:lungseg2023
+docker_image = pangyuteng/lungseg2023:latest
 docker_pull_policy = always
 
 executable = run.sh
 should_transfer_files = YES
 transfer_input_files = run.sh
 
-#requirements = ( Machine  == "REDLRADADM23620.ad.medctr.ucla.edu" ||  Machine  == "REDLRADADM23621.ad.medctr.ucla.edu")
-#requirements = Machine  == "REDLRADADM23710.ad.medctr.ucla.edu"
-#requirements = Machine  == "REDLRADADM14959.ad.medctr.ucla.edu"
-#requirements = (OpSys == "LINUX" && Arch == "X86_64" && GPUMEM > 10000)
-#requirements = (OpSys == "LINUX" && Arch == "X86_64" && GPUMEM > 40000)
-
-requirements = Machine  == "REDLRADADM14959.ad.medctr.ucla.edu"
+requirements = (OpSys == "LINUX" && Arch == "X86_64" && GPUMEM > 10000)
 
 when_to_transfer_output = ON_EXIT
 output = joblog/$(cluster).$(process).out

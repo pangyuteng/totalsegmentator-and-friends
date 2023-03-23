@@ -237,6 +237,9 @@ def gen_csv():
         for n,row in rawdf.iterrows():
             seg_folder = row.image_path.replace("ct.nii.gz",'segmentations')
             seg_path = os.path.join(os.path.dirname(seg_folder),'merged.nii.gz')
+            if os.path.exists(seg_path):
+                rawdf.loc[n,'seg_path']=seg_path
+                continue
             liver_file = os.path.join(seg_folder,'liver.nii.gz')
             if len(os.listdir(seg_folder)) >= 104:
                 liver_obj = sitk.ReadImage(liver_file)
@@ -261,7 +264,7 @@ def gen_csv():
         rawdf.image_size = rawdf.image_size.apply(lambda x: ast.literal_eval(x))
         rawdf.image_spacing = rawdf.image_spacing.apply(lambda x: ast.literal_eval(x))
         rawdf = rawdf[
-            (rawdf.totalsegmentator_folder.notnull()) & \
+            (rawdf.seg_path.notnull()) & \
             (rawdf.image_size.apply(lambda x: x[-1] >= 50)) & \
             (rawdf.image_spacing.apply(lambda x: x[-1] < 10 ))  ]
         print(rawdf.shape)
@@ -281,7 +284,7 @@ def gen_csv():
         rawdf.loc[X_validation,'kind']='validation'
         rawdf.loc[X_test,'kind']='test'
         
-        df = rawdf[['image_path', 'mask_path','totalsegmentator_folder','kind']]
+        df = rawdf[['image_path', 'seg_path','kind']]
         df = df.dropna()
         df.to_csv('data.csv',index=False)
 
@@ -304,3 +307,9 @@ if __name__ == "__main__":
             print(y,merged.shape)
             imageio.imwrite(f'tmp/viz-{x}-{y}.png',merged)
 
+'''
+
+docker run -it -u $(id -u):$(id -g) -w $PWD -v /mnt:/mnt pangyuteng/lungseg2023:latest bash
+python data_gen.py
+
+'''
