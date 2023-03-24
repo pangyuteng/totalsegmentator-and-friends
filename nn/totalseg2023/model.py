@@ -101,7 +101,7 @@ def UpBlock(width, block_depth):
 
 block_depth = 2
 res_block_depth = 2
-widths = [32, 64, 96, 128]
+widths = [32, 64, ] #96, 128]
 def get_model(image_size, num_classes):
     
     inputs = keras.Input(shape=image_size)
