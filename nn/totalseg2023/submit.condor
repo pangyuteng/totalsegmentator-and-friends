@@ -7,7 +7,7 @@ executable = run.sh
 should_transfer_files = YES
 transfer_input_files = run.sh
 
-requirements = (OpSys == "LINUX" && Arch == "X86_64" && GPUMEM > 20000)
+requirements = (OpSys == "LINUX" && Arch == "X86_64" && GPUMEM < 20000)
 
 when_to_transfer_output = ON_EXIT
 output = joblog/$(cluster).$(process).out

@@ -54,8 +54,8 @@ organ_mapper = dict(
 )
 
 NUM_CLASSES = max(organ_mapper.values())+1
-WH = 256
-THICKNESS = 16
+WH = 128
+THICKNESS = 4
 TARGET_SHAPE = (WH,WH,THICKNESS)
 IMG_SIZE = (WH,WH,THICKNESS,1)
 
