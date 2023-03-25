@@ -1,6 +1,7 @@
 __pycache__
 joblog
 docker_stderror
+images
 weights
 backup
 log

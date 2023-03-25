@@ -65,7 +65,7 @@ class ImageSummaryCallback(tf.keras.callbacks.Callback):
         with open(os.path.join(self.logdir,f"y-{self.tstamp}.json"),'a+') as f:
             f.write(json.dumps(mydict)+"\n")
 
-        idx = 4
+        idx = 8
         row0 = np.concatenate([
             cutout_x[0,:,:,idx].squeeze(),
             mask[0,:,:,idx].squeeze()/NUM_CLASSES,
