@@ -53,5 +53,5 @@ if __name__ == '__main__':
     model.fit(train_gen, validation_data=val_gen,
         steps_per_epoch=steps_per_epoch,validation_steps=validation_steps,
         verbose=2, epochs=epochs,  callbacks=callbacks,
-        max_queue_size=1,workers=1,use_multiprocessing=False,
+        max_queue_size=10,workers=1,use_multiprocessing=False,
     )
