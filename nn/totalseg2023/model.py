@@ -100,16 +100,10 @@ def UpBlock(width, block_depth):
 # 20a32b18c0b95e914101ec226ef35af9fdac3970
 
 block_depth = 2
-res_block_depth = 2
+res_block_depth = 0
 widths = [32, 64, 96, 128]
-def get_model(image_size, num_classes):
-    inputs = keras.Input(shape=image_size)
-    x = layers.Conv3D(widths[0], kernel_size=1)(inputs)
-    outputs = layers.Conv3D(num_classes, 
-        kernel_size=1, kernel_initializer="zeros",activation="softmax", padding="same")(x)
-    return keras.Model(inputs,outputs, name="residual_unet")
 
-def BAKget_model(image_size, num_classes):
+def get_model(image_size, num_classes):
     
     inputs = keras.Input(shape=image_size)
     
