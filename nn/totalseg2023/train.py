@@ -14,7 +14,7 @@ from tbutils import ImageSummaryCallback, MetricSummaryCallback
 
 if __name__ == '__main__':
 
-    batch_size = 4
+    batch_size = 1
     epochs = 100000
     learning_rate = 1e-4
     model = get_model(IMG_SIZE, NUM_CLASSES)
