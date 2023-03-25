@@ -13,4 +13,4 @@ for n,row in df.iterrows():
         print('err')
         df.loc[n,'sitkerror']=True
         
-df.to_csv('data.csv',index=False)
+#df.to_csv('data.csv',index=False)
