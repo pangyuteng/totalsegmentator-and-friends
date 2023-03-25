@@ -79,11 +79,13 @@ def readrow(row):
     current_index[axis] = idx
     extract_size[axis] = THICKNESS
 
+    file_reader = sitk.ImageFileReader()
     file_reader.SetFileName(image_path)
     file_reader.SetExtractIndex(current_index)
     file_reader.SetExtractSize(extract_size)
     image_obj = file_reader.Execute()
 
+    file_reader = sitk.ImageFileReader()
     file_reader.SetFileName(seg_path)
     file_reader.SetExtractIndex(current_index)
     file_reader.SetExtractSize(extract_size)

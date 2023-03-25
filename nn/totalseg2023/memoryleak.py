@@ -5,8 +5,9 @@ import traceback
 import SimpleITK as sitk
 import numpy as np
 import pandas as pd
+#from data_gen import readrow
 
-THICKNESS = 16
+THICKNESS = 1
 
 def readrow(row):
     image_path = row.image_path
@@ -27,18 +28,22 @@ def readrow(row):
     idx = int(np.random.choice(mylist))
     current_index[axis] = idx
     extract_size[axis] = THICKNESS
+    
 
+    file_reader = sitk.ImageFileReader()
+    #file_reader.SetImageIO("GDCMImageIO")
     file_reader.SetFileName(image_path)
     file_reader.SetExtractIndex(current_index)
     file_reader.SetExtractSize(extract_size)
     image_obj = file_reader.Execute()
+    img = sitk.GetArrayFromImage(image_obj)
+    #return
 
+    file_reader = sitk.ImageFileReader()
     file_reader.SetFileName(seg_path)
     file_reader.SetExtractIndex(current_index)
     file_reader.SetExtractSize(extract_size)
     mask_obj = file_reader.Execute()
-
-    img = sitk.GetArrayFromImage(image_obj)
     mask = sitk.GetArrayFromImage(mask_obj)
 
     min_axis = int(np.argmin(img.shape))
@@ -53,7 +58,8 @@ df = pd.read_csv('data.csv')
 for n,row in df.iterrows():
     print(n)
     try:
-        readrow(row)
+        a,b=readrow(row)
+        print(a.shape,b.shape)
     except KeyboardInterrupt:
         sys.exit(1)
     except:
