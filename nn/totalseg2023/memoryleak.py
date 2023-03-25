@@ -6,6 +6,8 @@ import SimpleITK as sitk
 import numpy as np
 import pandas as pd
 
+THICKNESS = 16
+
 def readrow(row):
     image_path = row.image_path
     seg_path = row.seg_path
@@ -55,4 +57,4 @@ for n,row in df.iterrows():
     except KeyboardInterrupt:
         sys.exit(1)
     except:
-    
+        traceback.print_exc()
