@@ -64,7 +64,7 @@ def readrow(row):
     seg_path = row.seg_path
 
     file_reader = sitk.ImageFileReader()
-    file_reader.SetFileName(image_path)
+    file_reader.SetFileName(seg_path)
     file_reader.ReadImageInformation()
     image_size = file_reader.GetSize()
 
@@ -120,6 +120,7 @@ class MySeriGenerator(Sequence):
         gen_csv() # prepare
         self.df = pd.read_csv(CSV_FILE,dtype=str)
         self.df = self.df[self.df.kind==kind]
+        self.df = self.df[self.df.sitkerror=='False']
         self.df = self.df.reset_index()
         print(self.df.index,len(self.df.index))
 
@@ -291,8 +292,11 @@ def gen_csv():
 
 if __name__ == "__main__":
     mygen = MySeriGenerator('validation',shuffle=True,augment=True)
+    print(len(mygen))
     mygen = MySeriGenerator('test',shuffle=True,augment=True)
+    print(len(mygen))
     mygen = MySeriGenerator('train',ret_option=1,shuffle=True,augment=True)
+    print(len(mygen))
     mygen.on_epoch_end()
     os.makedirs('tmp',exist_ok=True)
     for x in range(2):

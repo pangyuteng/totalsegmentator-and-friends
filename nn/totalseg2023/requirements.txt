@@ -2,8 +2,7 @@
 #tensorflow_datasets
 #keras
 albumentations>=0.5.2
-#SimpleITK>=2.2.1
-SimpleITK==2.1.1.2
+SimpleITK>=2.2.1
 pydicom>=2.1.2
 pandas>=1.1.5
 scikit-learn>=0.24.1
