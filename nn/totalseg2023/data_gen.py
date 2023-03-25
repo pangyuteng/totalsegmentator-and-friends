@@ -84,14 +84,13 @@ def readrow(row):
     file_reader.SetExtractIndex(current_index)
     file_reader.SetExtractSize(extract_size)
     image_obj = file_reader.Execute()
+    img = sitk.GetArrayFromImage(image_obj)
 
     file_reader = sitk.ImageFileReader()
     file_reader.SetFileName(seg_path)
     file_reader.SetExtractIndex(current_index)
     file_reader.SetExtractSize(extract_size)
     mask_obj = file_reader.Execute()
-
-    img = sitk.GetArrayFromImage(image_obj)
     mask = sitk.GetArrayFromImage(mask_obj)
 
     min_axis = int(np.argmin(img.shape))
