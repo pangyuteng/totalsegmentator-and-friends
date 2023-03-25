@@ -1,6 +1,9 @@
 
 import os
 import sys
+import traceback
+import SimpleITK as sitk
+import numpy as np
 import pandas as pd
 
 def readrow(row):
@@ -44,18 +47,12 @@ def readrow(row):
 
 
 df = pd.read_csv('data.csv')
-df['sitkerror']=None
-while True:
-    for n,row in df.iterrows():
-        print(n)
-        try:
-            readrow(row)
-            df.loc[n,'sitkerror']=False
-        except KeyboardInterrupt:
-            sys.exit(1)
-        except:
-            print('err')
-            df.loc[n,'sitkerror']=True
 
-if sys.argv[1]=='save':
-    df.to_csv('data.csv',index=False)
+for n,row in df.iterrows():
+    print(n)
+    try:
+        readrow(row)
+    except KeyboardInterrupt:
+        sys.exit(1)
+    except:
+    
