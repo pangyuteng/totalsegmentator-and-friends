@@ -5,7 +5,7 @@ import numpy as np
 import SimpleITK as sitk
 
 MYSIZE = 128
-for x in range(10):
+for x in range(20):
     fname = f'{x}.nii.gz'
     if not os.path.exists(fname):
         arr = np.random.rand(MYSIZE,MYSIZE,MYSIZE)
@@ -27,9 +27,9 @@ def myread(x,thickness):
     img = sitk.GetArrayFromImage(image_obj)
     return img
 
-for thickness in [10,1]:
-    for x in range(10):
+for thickness in [1,10]:
+    for x in range(20):
         myread(x,thickness)
-    print('you have 20 seconds to run `lsof | grep nii.gz | wc -l`')
-    time.sleep(20)
+    print('you have 5 seconds to run `lsof | grep nii.gz | wc -l`')
+    time.sleep(5)
 
