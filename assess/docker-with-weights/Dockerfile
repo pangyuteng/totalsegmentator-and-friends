@@ -7,7 +7,7 @@ FROM wasserth/totalsegmentator_container:master
 ENV TOTALSEG_WEIGHTS_PATH=/opt/totalsegmentator_weights
 
 # in addition to original task ids, added 258 for `-ta lung_vessels`
-ARG TASK_ID_LIST="[251,252,253,254,255,256,258]"
+ARG TASK_ID_LIST="[251,252,253,254,255,256,258,273]"
 
 RUN mkdir -p /opt/totalsegmentator_weights
 WORKDIR /opt
