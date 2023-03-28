@@ -23,11 +23,12 @@ def gen_ghetto_body(image_nifti_file,output_nifti_file):
     region = measure.regionprops(label_image)
     region = sorted(region,key=lambda x:x.area,reverse=True)
 
+    mask[mask==1]=105
     for r in region: # should just be 1 or 2
         tmpmask = label_image==r.label
         contain_body = np.sum(tmpmask) # TODO: maybe need to consider bkgd touching iamge border?
         if contain_body > 0:
-            mask[np.logical_and(tmpmask==1,mask==0)]=105
+            mask[np.logical_and(tmpmask==1,mask==0)]=1
             break
 
     mask_obj = sitk.GetImageFromArray(mask)
