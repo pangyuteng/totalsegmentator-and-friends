@@ -1,0 +1,22 @@
+universe = docker
+docker_image = pangyuteng/totalsegmentator:latest
+docker_pull_policy = always
+
+executable = merge.py
+transfer_input_files = merge.py
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+
+log = log/$(cluster).$(process).log
+error = log/$(cluster).$(process).err
+output = log/$(cluster).$(process).out
+
+requirements = (OpSys == "LINUX" && Arch == "X86_64")
+
+request_cpus = 1
+request_memory = 5GB
+request_disk = 5GB
+
+max_materialize = 10
+arguments = "$(myargs)"
+queue myargs from my.args
