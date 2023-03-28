@@ -25,7 +25,7 @@ def gen_ghetto_body(image_nifti_file,output_nifti_file):
 
     for r in region: # should just be 1 or 2
         tmpmask = label_image==r.label
-        contain_body = np.sum(tmpmask)
+        contain_body = np.sum(tmpmask) # maybe need to consider bkgd touching iamge border?
         if contain_body > 0:
             mask[np.logical_and(tmpmask==1,mask==0)]=105
             break
