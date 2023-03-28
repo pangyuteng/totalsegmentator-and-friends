@@ -5,9 +5,8 @@ def gen_merge():
     root = '/mnt/scratch/data/Totalsegmentator_dataset'
     image_path_list = [str(x) for x in Path(root).rglob("ct.nii.gz")]
     
-    for image_path in image_path_list:
+    for img_file in image_path_list:
         seg_folder = os.path.join(os.path.dirname(image_path),'segmentations')
-        img_file = os.path.join(os.path.dirname(image_path),'ct.nii.gz')
         seg_file = os.path.join(os.path.dirname(image_path),'segmentations.nii.gz')
         mystr = f'{img_file} {seg_folder} {seg_file}'
         print(mystr)
