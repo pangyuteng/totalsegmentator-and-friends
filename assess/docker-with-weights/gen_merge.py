@@ -6,8 +6,8 @@ def gen_merge():
     image_path_list = [str(x) for x in Path(root).rglob("ct.nii.gz")]
     
     for img_file in image_path_list:
-        seg_folder = os.path.join(os.path.dirname(image_path),'segmentations')
-        seg_file = os.path.join(os.path.dirname(image_path),'segmentations.nii.gz')
+        seg_folder = os.path.join(os.path.dirname(img_file),'segmentations')
+        seg_file = os.path.join(os.path.dirname(img_file),'segmentations.nii.gz')
         mystr = f'{img_file} {seg_folder} {seg_file}'
         print(mystr)
 
