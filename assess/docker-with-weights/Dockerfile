@@ -14,3 +14,9 @@ WORKDIR /opt
 COPY download_weights.py /opt/download_weights.py
 RUN python /opt/download_weights.py
 RUN chmod 777 /opt/totalsegmentator_weights
+
+# downgrade from 2.1.1.2 to avoid issue: https://github.com/MIC-DKFZ/nnDetection/issues/24
+RUN pip install SimpleITK==2.0.0
+
+
+
